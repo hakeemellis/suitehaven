@@ -5,7 +5,7 @@ const Home = () => {
 
   return (
     <body>
-      <p className='bg-white text-black'>Some</p>
+      <p className='bg-white text-black'>Some THING</p>
     </body>
   );
 };
