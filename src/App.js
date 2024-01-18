@@ -1,13 +1,25 @@
 import React from 'react';
-import './index.css'; // Import the compiled Tailwind CSS file
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/homepage'; // Import the correct page component
+
 
 function App() {
   return (
-    <div className="bg-blue-500 text-white p-4">
-      Hello Tailwind CSS!
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={           
+          <div>
+            <Helmet>
+            <title>SuiteHaven</title>
+            </Helmet>
+            <HomePage />
+          </div>
+        } 
+        />
+        {/* Add more routes for other pages */}
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
-
