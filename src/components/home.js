@@ -1,12 +1,11 @@
-// src/components/Navbar.js
+// src/components/Home.js
 import React from 'react';
 
-const Home = () => {
-
+const Home = ({ isDarkMode }) => {
   return (
-    <body>
-      <p className='bg-white text-black'>Some THING</p>
-    </body>
+    <section className={`bg-${isDarkMode ? 'black' : 'white'} text-${isDarkMode ? 'white' : 'black'} transition-all duration-500 ease-in-out`}>
+      <p>Some THING</p>
+    </section>
   );
 };
 
