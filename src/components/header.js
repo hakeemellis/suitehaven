@@ -9,7 +9,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           <div className="container mx-auto flex items-center justify-between">
             <div className="text-xl font-semibold">SuiteHaven</div>
             <div>
-              <button className="px-4 py-2 border rounded" onClick={toggleDarkMode}>
+              <button className="px-4 py-2 border-2 rounded" onClick={toggleDarkMode}>
                 {isDarkMode ? 'Light Mode' : 'Dark Mode'}
               </button>
             </div>
