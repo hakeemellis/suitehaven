@@ -3,9 +3,8 @@ import React from 'react';
 
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   return (
-    <div>
       <header>
-        <nav className={`bg-${isDarkMode ? 'black' : 'white'} text-${isDarkMode ? 'white' : 'black'} p-4 transition-all duration-500 ease-in-out z-index-0`}>
+        <nav className={`bg-${isDarkMode ? 'black' : 'white'} text-${isDarkMode ? 'white' : 'black'} p-4 transition-all duration-500 ease-in-out`}>
           <div className="container mx-auto flex items-center justify-between">
             <div className="text-xl font-semibold">SuiteHaven</div>
             <div>
@@ -16,7 +15,6 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           </div>
         </nav>
       </header>
-    </div>
   );
 };
 

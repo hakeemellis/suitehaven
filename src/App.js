@@ -4,7 +4,7 @@ import HomePage from './pages/homepage'; // Import the correct page component
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 
-const App = ({ isDarkMode, toggleDarkMode }) => {
+const App = () => {
   return (
   <HelmetProvider>
     <Router>
@@ -15,7 +15,7 @@ const App = ({ isDarkMode, toggleDarkMode }) => {
             <title>SuiteHaven</title> {/* to default to "SuiteHaven" if 
             attached route has no title to load*/}
             </Helmet> 
-            <HomePage isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+            <HomePage />
           </div>
         } 
         />

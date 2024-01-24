@@ -12,7 +12,7 @@ const HomePage = () => {
   };
   console.log(isDarkMode)
   return (
-    <div>
+    <div className={`bg-${isDarkMode ? 'black' : 'gray-100'} transition-all duration-500 ease-in-out`}>
       <Helmet>
         <title>Home | SuiteHaven</title>
       </Helmet>
