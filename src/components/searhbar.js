@@ -22,7 +22,8 @@ const SearchBar = ({ isDarkMode }) => {
                 <input
                 type="text"
                 placeholder="Destination"
-                className="px-4 py-2 border rounded-l focus:outline-none"
+                className= {`bg-${isDarkMode ? 'black' : 'white'} text-${isDarkMode ? 'white' : 'black'} transition-all duration-500 ease-in-out 
+                px-4 py-2 border-2 rounded-l focus:outline-none`}
                 />
                 <input
                 type="date"
