@@ -1,7 +1,7 @@
 // src/components/Home.js
 import React from 'react';
 
-const SearchBar = () => {
+const Search = () => {
   return (
 
   <section className="relative h-screen overflow-hidden"> {/* Start for Background & Rest of Code */}
@@ -64,4 +64,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default Search;

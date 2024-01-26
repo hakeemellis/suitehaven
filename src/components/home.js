@@ -1,12 +1,12 @@
 // src/components/Home.js
 import React from 'react';
-import SearchBar from '../components/searhbar';
+import Search from '../components/search';
 
 const Home = () => {
   return (
     <section>
 
-      <SearchBar />
+      <Search />
     
       <section className={`dark:bg-zinc-950 dark:text-white bg-white text-black p-4 
       transition-all duration-500 ease-in-out container mx-auto flex items-center justify-center 
