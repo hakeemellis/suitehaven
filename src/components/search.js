@@ -4,8 +4,9 @@ import React from 'react';
 const Search = () => {
   return (
 
-  <section className="relative h-screen overflow-hidden"> {/* Start for Background & Rest of Code */}
-    {/* Video Background */}
+  <section className="relative h-screen overflow-hidden"> {/* Search Hero Code */}
+    
+    {/* Video Within Hero Banner */}
     <video className="absolute top-0 left-0 w-full h-full object-cover z-1" 
      autoPlay muted loop>
       <source src="/assets/videos/test2.mp4" type="video/mp4" />
@@ -14,9 +15,10 @@ const Search = () => {
       Your browser does not support the video tag.
     </video>
 
-    {/* Overlay */}
+    {/* Overlay for Video */}
     <div className="absolute top-0 left-0 w-full h-full bg-gray-950 opacity-70 z-2"></div>
 
+    {/* Search Section */}
     <section className={`relative z-0 dark:bg-zinc-950 dark:text-white bg-white text-black transition-all duration-500 ease-in-out
         flex flex-col items-center justify-center p-15 my-20 top-10 mx-auto max-w-5xl text-center 
         rounded-2xl shadow-2xl dark:shadow-zinc-900 opacity-85`}>
