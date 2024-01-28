@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/homepage'; // Import the correct page component
+import HomePage from './pages/homepage'; 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 

@@ -1,35 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/header';
 import Home from '../components/home';
+import Search from '../components/search';
 import { Helmet } from 'react-helmet-async';
 
 
 const HomePage = () => {
+
+  // Dark Mode //
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  useEffect(() => {
-    // Check if dark mode is enabled in the system
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    useEffect(() => {
+      // Check if dark mode is enabled in the system (if user prefers dark mode)
+      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    // Apply dark mode if enabled in the system or based on user preference
-    setIsDarkMode(prefersDarkMode);
-  }, []);
+      // To set dark mode by default if enabled in their system
+      setIsDarkMode(prefersDarkMode);
+    }, []);
 
-  useEffect(() => {
-    // Apply dark mode class to the existing html element
-    document.documentElement.classList.toggle('dark', isDarkMode);
-  }, [isDarkMode]);
+    useEffect(() => {
+      // Apply dark mode class to html head based on if "dark" is present after toggle
+      // of the element
+      document.documentElement.classList.toggle('dark', isDarkMode);
+    }, [isDarkMode]);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+      setIsDarkMode(!isDarkMode);
+    };
   console.log(isDarkMode)
+  // End of Dark Mode //
+  
   return (
     <div className={`dark:bg-black bg-slate-100 transition-all duration-500 ease-in-out`}>
       <Helmet>
         <title>Home | SuiteHaven</title>
       </Helmet>
       <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      <Search/>
       <Home/>
     </div>
   );
