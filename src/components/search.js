@@ -1,7 +1,31 @@
 // src/components/Home.js
-import React from 'react';
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import HotelAPI from './hotelapi';
 
 const Search = () => {
+
+  const [destination, setDestination] = useState('');
+  const navigate = useNavigate(); // Use useNavigate hook instead of useRouter
+
+  const handleInputChange = (event) => {
+    setDestination(event.target.value);
+  };
+
+  const handleSearchClick = async () => {
+    try {
+      // Call the HotelAPI with the entered destination
+      const result = await HotelAPI(destination);
+      console.log(result);
+
+      // Navigate to the RegionSearch page with the search query as a parameter
+      navigate(`/regionsearch?userQuery=${encodeURIComponent(destination)}&jsonData=${encodeURIComponent(JSON.stringify(result))}`);
+    } catch (error) {
+      console.error(error);
+      // Handle errors, e.g., display an error message to the user
+    }
+  };
+
   return (
 
     <section className="relative h-screen overflow-hidden"> {/* Search Hero Code */}
@@ -38,7 +62,7 @@ const Search = () => {
                 <section className="flex flex-col sm:flex-row items-center justify-center gap-x-2 gap-y-2">
 
                   {/* Elements within the Search Bar */}
-                    <input type="text" placeholder="Destination"
+                    <input type="text" placeholder="Destination" value={destination} onChange={handleInputChange}
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-6 py-3 border rounded-xl focus:outline-none`}/>
 
@@ -54,7 +78,8 @@ const Search = () => {
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-1 py-3 border rounded-xl focus:outline-none items-center text-center`}/>
 
-                    <button className= "rounded-3xl focus:outline-none px-4 py-3 bg-sky-600 text-white">
+                    <button onClick={handleSearchClick}
+                    className= "rounded-3xl focus:outline-none px-4 py-3 bg-sky-600 text-white">
                     Search
                     </button>
 
