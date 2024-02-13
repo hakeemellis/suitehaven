@@ -31,7 +31,7 @@ const HomePage = () => {
   // End of Dark Mode //
   
   return (
-    <div>
+    <div className='antialiased'>
       <Helmet>
         <title>Home | SuiteHaven</title>
       </Helmet>

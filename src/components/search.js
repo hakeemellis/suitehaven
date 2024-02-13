@@ -1,11 +1,20 @@
 // src/components/Search.js
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import HotelAPI from './hotelapi';
 
 const Search = () => {
 
   const [destination, setDestination] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if the current route is "/"
+    if (location.pathname === "/") {
+      // Clear sessionStorage
+      sessionStorage.clear();
+    }
+  })
 
   const handleInputChange = (event) => {
     setDestination(event.target.value);
