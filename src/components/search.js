@@ -1,7 +1,7 @@
 // src/components/Search.js
 import React, {useState, useEffect} from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import HotelAPI from './hotelapi';
+import {HotelAPI} from './hotelapi';
 
 const Search = () => {
 
