@@ -31,7 +31,7 @@ const RegionSearch = () => {
   // End of Dark Mode //
 
   return (
-    <div>
+    <div className='antialiased'>
       <Helmet>
         <title>Region Search | SuiteHaven</title>
       </Helmet>
