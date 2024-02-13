@@ -31,7 +31,7 @@ const HomePage = () => {
   // End of Dark Mode //
   
   return (
-    <div className={`dark:bg-black bg-slate-100 transition-all duration-500 ease-in-out`}>
+    <div>
       <Helmet>
         <title>Home | SuiteHaven</title>
       </Helmet>

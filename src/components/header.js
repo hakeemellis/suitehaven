@@ -1,5 +1,6 @@
 // src/components/Navbar.js
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link component from React Router
 
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   return (
@@ -12,7 +13,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
           {/* Container for NavBar Elements */}
           <div className="container mx-auto flex items-center justify-between">
-            <div className="text-xl font-semibold">SuiteHaven</div>
+            <Link to="/" className="text-xl font-semibold">SuiteHaven</Link>
 
               {/* Light/Dark Mode Toggle */}
               <div>

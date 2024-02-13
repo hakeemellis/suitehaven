@@ -1,12 +1,11 @@
-// src/components/Home.js
+// src/components/Search.js
 import React, {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HotelAPI from './hotelapi';
 
 const Search = () => {
 
   const [destination, setDestination] = useState('');
-  const navigate = useNavigate(); // Use useNavigate hook instead of useRouter
 
   const handleInputChange = (event) => {
     setDestination(event.target.value);
@@ -18,14 +17,16 @@ const Search = () => {
       const result = await HotelAPI(destination);
       console.log(result);
 
-      // Navigate to the RegionSearch page with the search query as a parameter
-      navigate(`/regionsearch?userQuery=${encodeURIComponent(destination)}&jsonData=${encodeURIComponent(JSON.stringify(result))}`);
+      // Save destination and result to sessionStorage
+      sessionStorage.setItem('destination', destination);
+      sessionStorage.setItem('result', JSON.stringify(result));
+
     } catch (error) {
       console.error(error);
       // Handle errors, e.g., display an error message to the user
     }
   };
-
+  
   return (
 
     <section className="relative h-screen overflow-hidden"> {/* Search Hero Code */}
@@ -78,10 +79,14 @@ const Search = () => {
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-1 py-3 border rounded-xl focus:outline-none items-center text-center`}/>
 
-                    <button onClick={handleSearchClick}
-                    className= "rounded-3xl focus:outline-none px-4 py-3 bg-sky-600 text-white">
-                    Search
+                    <Link to="/regionsearch">
+                    <button
+                      onClick={handleSearchClick}
+                      className="rounded-3xl focus:outline-none px-4 py-3 bg-sky-600 text-white"
+                      >
+                      Search
                     </button>
+                    </Link>
 
                 </section>
               {/* End of Search Bar */}
