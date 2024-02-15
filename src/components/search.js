@@ -6,6 +6,9 @@ import {HotelAPI} from './hotelapi';
 const Search = () => {
 
   const [destination, setDestination] = useState('');
+  const [checkInDate, setCheckInDate] = useState('');
+  const [checkOutDate, setCheckOutDate] = useState('');
+  const [guests, setGuests] = useState('');
   const location = useLocation();
 
   useEffect(() => {
@@ -20,6 +23,18 @@ const Search = () => {
     setDestination(event.target.value);
   };
 
+  const handleCheckInDateChange = (event) => {
+    setCheckInDate(event.target.value);
+  };
+
+  const handleCheckOutDateChange = (event) => {
+    setCheckOutDate(event.target.value);
+  };
+
+  const handleGuestsChange = (event) => {
+    setGuests(event.target.value);
+  };
+
   const handleSearchClick = async () => {
     try {
       // Call the HotelAPI with the entered destination
@@ -30,11 +45,19 @@ const Search = () => {
       sessionStorage.setItem('destination', destination);
       sessionStorage.setItem('result', JSON.stringify(result));
 
+      // To save checkindate, checkoutdate and guests to sessionStorage
+      sessionStorage.setItem('checkInDate', checkInDate);
+      sessionStorage.setItem('checkOutDate', checkOutDate);
+      sessionStorage.setItem('guests', guests);
+
     } catch (error) {
       console.error(error);
       // Handle errors, e.g., display an error message to the user
     }
   };
+
+  // Get today's date in the format "YYYY-MM-DD"
+  const today = new Date().toISOString().split('T')[0];
   
   return (
 
@@ -76,15 +99,15 @@ const Search = () => {
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-6 py-3 border rounded-xl focus:outline-none`}/>
 
-                    <input type="date"
+                    <input type="date" placeholder='Check-In Date' value={checkInDate} onChange={handleCheckInDateChange} min={today}
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-4 py-3 border rounded-xl focus:outline-none`}/>
 
-                    <input type="date" 
+                    <input type="date" placeholder='Check-Out Date' value={checkOutDate} onChange={handleCheckOutDateChange} min={today}
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-4 py-3 border rounded-xl focus:outline-none`}/>
 
-                    <input type="number" placeholder="Guests"
+                    <input type="number" placeholder="Guests" value={guests} onChange={handleGuestsChange}
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-1 py-3 border rounded-xl focus:outline-none items-center text-center`}/>
 

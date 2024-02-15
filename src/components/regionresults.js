@@ -14,20 +14,49 @@ const RegionResults = () => {
       setLoading(false); // Set loading to false once data is loaded
     }
 
-    // Check if the component is mounted on the route "/regionsearch" and refresh hasn't occurred yet in this session
+    // Check if the component is mounted on the route "/regionsearch"
+    const isRegionSearch = window.location.pathname === '/regionsearch';
+
+    // Check if the refresh hasn't occurred yet in this session or if sessionStorage refreshed value is false
     const refreshFlag = sessionStorage.getItem('refreshed');
-    if (window.location.pathname === '/regionsearch' && !refreshFlag) {
-      // Set a timeout to refresh the page after 2 seconds
-      const timeoutId = setTimeout(() => {
+    if (isRegionSearch && (refreshFlag !== 'true' || refreshFlag === 'false')) {
+    // Change loading state to true when refresh is triggered
+    setLoading(true);
+
+    // Set a timeout to refresh the page after 2 seconds
+    const timeoutId = setTimeout(() => {
         window.location.reload(); // Reload the page
         // Update sessionStorage to indicate that the refresh has occurred in this session
         sessionStorage.setItem('refreshed', 'true');
-      }, 2000); // 2000 milliseconds = 2 seconds
-      
-      // Clean up the timeout to avoid memory leaks
-      return () => clearTimeout(timeoutId);
+    }, 2000); // 2000 milliseconds = 2 seconds
+    
+    // Clean up the timeout to avoid memory leaks
+    return () => clearTimeout(timeoutId);
     }
-  }, []); // Empty dependency array ensures this effect runs only once, on component mount
+
+    // Change loading state to false when refreshed turns back to true
+    if (refreshFlag === 'true') {
+    setLoading(false);
+    }
+    }, []); // Empty dependency array
+    
+  // Handle selecting a region and navigating to /hotelresults route
+  const handleRegionSelect = async (regionId) => {
+    try {
+      // Store the selected region ID to sessionStorage
+      sessionStorage.setItem('selectedRegionId', regionId);
+      
+      // Set refreshed to false or remove it to trigger autorefresh
+      const refreshed = sessionStorage.getItem('refreshed');
+      if (refreshed === 'true') {
+        sessionStorage.setItem('refreshed', 'false');
+      }
+
+    } catch (error) {
+      console.error(error);
+      // Handle errors, e.g., display an error message to the user
+    }
+  };
 
   // Render loading indicator while data is being fetched
   if (loading) {
@@ -55,8 +84,13 @@ const RegionResults = () => {
             {/* Render fetched data */}
             <div className=''>
                 {jsonData.data.map((item, index) => (
-                <Link key={index} to={`/hotelresults/${item.gaiaId || item.cityId || item.hotelId}`} className="block border border-gray-300 p-4 rounded-lg mb-4 shadow-md dark:shadow-cyan-900">
-                <p>{item.regionNames.displayName}</p>
+                  <Link
+                  key={index}
+                  to= "/hotelsearch"
+                  onClick={() => handleRegionSelect(item.gaiaId || item.cityId || item.hotelId)} // Pass the region ID to handleRegionSelect
+                  className="block border border-gray-300 p-4 rounded-lg mb-4 shadow-md dark:shadow-cyan-900"
+                >
+                  <p>{item.regionNames.displayName}</p>
                 </Link>
                 ))}
             </div>
