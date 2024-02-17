@@ -76,6 +76,27 @@ const HotelInfoAPI = async (hotelId) => {
   }
 };
 
-export { HotelAPI, HotelResultsAPI, HotelSummaryAPI, HotelInfoAPI };
+const HotelDetailsAPI = async (hotelId) => {
+  const url = `https://hotels-com-provider.p.rapidapi.com/v2/hotels/details?domain=US&hotel_id=${hotelId}&locale=en_US`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '8808d13062msh5d8020d2ac63481p198a9bjsna8215521a10e',
+      'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
+    }
+  };
+  
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json(); // Parse the response as JSON
+    return result; // Return the parsed JSON data
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error fetching hotel details');
+  }
+};
+
+
+export { HotelAPI, HotelResultsAPI, HotelSummaryAPI, HotelInfoAPI, HotelDetailsAPI };
 
   
