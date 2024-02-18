@@ -9,7 +9,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
       {/* NavBar */}
       <nav className={`dark:bg-zinc-950 dark:text-white bg-slate-100 text-black p-4 transition-all 
         duration-500 ease-in-out container mx-auto flex 
-        items-center justify-between shadow-md dark:shadow-zinc-900`}>
+        items-center justify-between shadow-md dark:shadow-zinc-900 z-0`}>
 
           {/* Container for NavBar Elements */}
           <div className="container mx-auto flex items-center justify-between">

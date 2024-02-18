@@ -14,25 +14,26 @@ const HotelDetailed = () => {
     const fetchHotelDetails = async () => {
       try {
         const hotelId = sessionStorage.getItem('hotel_id');
-        if (hotelId) {
-          const data = await HotelSummaryAPI(hotelId);
-          if (data && data.summary && data.summary.name) {
-            setHotelName(data.summary.name);
-          } else {
-            setError('Hotel details not found.');
-          }
-          if (data && data.propertyGallery && data.propertyGallery.images) {
-            setHotelImages(data.propertyGallery.images);
-          } else {
-            setHotelImages([]);
-          }
-        } else {
-          setError('Hotel ID not found in sessionStorage.');
+        if (!hotelId) {
+          throw new Error('Hotel ID not found in sessionStorage.');
         }
-        // Fetch hotel details including review score
+
+        const data = await HotelSummaryAPI(hotelId);
+        if (!data || !data.summary || !data.summary.name) {
+          throw new Error('Hotel details not found.');
+        }
+        setHotelName(data.summary.name);
+
         const detailsData = await HotelDetailsAPI(hotelId);
-        if (detailsData && detailsData.reviewInfo && detailsData.reviewInfo.summary && detailsData.reviewInfo.summary.overallScoreWithDescriptionA11y) {
-          setHotelScore(detailsData.reviewInfo.summary.overallScoreWithDescriptionA11y.value);
+        if (!detailsData || !detailsData.reviewInfo || !detailsData.reviewInfo.summary || !detailsData.reviewInfo.summary.overallScoreWithDescriptionA11y) {
+          throw new Error('Hotel score not found.');
+        }
+        setHotelScore(detailsData.reviewInfo.summary.overallScoreWithDescriptionA11y.value);
+
+        if (detailsData && detailsData.propertyGallery && detailsData.propertyGallery.images) {
+          setHotelImages(detailsData.propertyGallery.images);
+        } else {
+          setHotelImages([]);
         }
       } catch (error) {
         setError('Error fetching hotel details: ' + error.message);
@@ -61,12 +62,12 @@ const HotelDetailed = () => {
   }
 
   return (
-    <section className="dark:bg-zinc-950 dark:text-white bg-white text-black p-4 transition-all duration-500 ease-in-out container mx-auto flex items-center justify-center shadow-md m-0 h-screen">
-      <section className="text-center">
+    <section className="dark:bg-black dark:text-white bg-white text-black p-4 transition-all duration-500 ease-in-out container mx-auto flex items-center justify-center shadow-md m-0 h-screen">
+      <section className="text-center dark:bg-zinc-950 bg-slate-100 shadow-md dark:shadow-cyan-950 transition-all duration-500 ease-in-out">
         {/* Display images */}
-        <div className="flex mb-4">
-          {hotelImages.map((image, index) => (
-            <img key={index} src={image.image.url} alt={`${index}`} className="w-64 h-64 object-cover m-2" />
+        <div className="flex mb-4 shadow-sm">
+          {hotelImages.slice(0, 4).map((image, index) => (
+            <img key={index} src={image.image.url} alt={`${index}`} className="w-64 h-64 object-cover m-2 shadow-sm" />
           ))}
         </div>
         {/* Show more button */}
@@ -87,3 +88,5 @@ const HotelDetailed = () => {
 };
 
 export default HotelDetailed;
+
+
