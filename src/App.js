@@ -5,6 +5,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import RegionSearch from './pages/regionsearch';
 import HotelSearch from './pages/hotelsearch';
 import HotelSummary from './pages/hotelsummary';
+import Login from './pages/login';
 
 
 const App = () => {
@@ -50,6 +51,16 @@ const App = () => {
              attached route has no title to load*/}
             </Helmet> 
             <HotelSummary />
+          </div>
+        } />
+
+        <Route path="/login" element={
+          <div>
+            <Helmet>
+            <title>SuiteHaven</title> {/* to default to "SuiteHaven" if 
+             attached route has no title to load*/}
+            </Helmet> 
+            <Login />
           </div>
         } />
 

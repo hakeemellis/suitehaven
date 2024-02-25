@@ -1,0 +1,10 @@
+/* CSS file or inline styles */
+@media (min-width: 768px) {
+    .md\:hidden {
+      display: none !important;
+    }
+    .md\:block {
+      display: block !important;
+    }
+  }
+  

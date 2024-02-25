@@ -10,6 +10,9 @@ const HotelDetailed = () => {
   const [aboutProperty, setAboutProperty] = useState('');
   const [aboutLanguages, setAboutLanguages] = useState('');
   const [aboutPolicies, setAboutPolicies] = useState('');
+  const [aboutExtras, setAboutExtras] = useState('');
+  const [extrasContent, setExtrasContent] = useState('');
+  const [aboutHeaderText, setAboutHeaderText] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -53,11 +56,38 @@ const HotelDetailed = () => {
         const aboutLanguagesText = detailsData.propertyContentSectionGroups?.aboutThisProperty?.sections[0]?.bodySubSections[1]?.elements[0]?.items[0]?.content?.primary?.value || '';
         setAboutLanguages(aboutLanguagesText);
 
-        const policiesSection = detailsData.propertyContentSectionGroups?.policies?.sections[0];
-        const policyItems = policiesSection?.bodySubSections[0]?.elements[0]?.items || [];
-        const policyTexts = policyItems.map(item => item?.content?.text || '');
+        // Load the value from the path elements[0] > header > text separately
+        const headerText = detailsData.propertyContentSectionGroups?.policies?.sections[0]?.bodySubSections[1]?.elements[0]?.header?.text || '';
+        setAboutHeaderText(headerText)
+        console.log(headerText);
+
+        // Load the value from the path elements[0] > header > text separately
+        const optionalTitle = detailsData.propertyContentSectionGroups?.policies?.sections[0]?.bodySubSections[0]?.elements[0]?.header?.text || '';
+        setAboutExtras(optionalTitle)
+        console.log(optionalTitle);
+
+        const optionalSection = detailsData.propertyContentSectionGroups?.policies?.sections[0]?.bodySubSections[0]?.elements[0]?.items || '';
+        const optionalText = optionalSection.map(item => item?.content?.text || '');
+        setExtrasContent(optionalText)
+
+        //const policyItems = policiesSection?.bodySubSections[0]?.elements[0]?.items || [];
+        //const policyTexts = policyItems.map(item => item?.content?.text || '');
+        //const policiesSection = detailsData.propertyContentSectionGroups?.policies?.sections[0];
+        //const policyItems = policiesSection?.bodySubSections[0]?.elements[0]?.items || [];
+        //const policyTexts = policyItems.map(item => item?.content?.text || '');
+
+        const policiesSection = (detailsData.propertyContentSectionGroups?.policies?.sections[0]?.bodySubSections[1]?.elements[0]?.items[0]?.contents
+          || detailsData.propertyContentSectionGroups?.policies?.sections[0]?.bodySubSections[1]?.elements[0]?.items);
+        const policyTexts = policiesSection.map(item => item?.primary?.value || item?.content?.text || '');
+        //const bodySubSections = policiesSection?.bodySubSections || [];
+        // Use flatMap to iterate over all elements of bodySubSections
+        //const policyTexts = bodySubSections.flatMap(subSection => {
+          // For each subSection, extract items and map over them to get the text
+          //const items = subSection?.elements[0]?.items || [];
+          //return items.map(item => item?.content?.text || '');
+        //});
         setAboutPolicies(policyTexts);
-        console.log(policyItems)
+        console.log(policyTexts)
       } catch (error) {
         setError('Error fetching hotel details: ' + error.message);
       } finally {
@@ -128,8 +158,10 @@ const HotelDetailed = () => {
 
       {/* Policies */}
       <section className="text-left dark:bg-zinc-950 bg-slate-100 shadow-md dark:shadow-cyan-950 transition-all duration-500 ease-in-out p-4 mt-8 container mx-auto max-w-6xl">
-        <h2 className="text-2xl font-semibold mb-2">Policies</h2>
+        <h2 className='text-2xl font-semibold mb-3'>{aboutHeaderText}</h2>
         <div>{aboutPolicies.map(policy => parse(policy))}</div>
+        <h2 className='text-2xl font-semibold mt-8 mb-3'>{aboutExtras}</h2>
+        <div>{extrasContent.map(content => parse(content))}</div>
       </section>
       {/* End of About this property section */}
     </div>
