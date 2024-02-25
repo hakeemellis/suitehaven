@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/header';
 import { Helmet } from 'react-helmet-async';
-import LoginSection from '../components/loginsection';
+import SignUpSection from '../components/signupsection';
 
 
-const Login = () => {
+const Signup = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -24,12 +24,12 @@ const Login = () => {
   return (
     <div className='antialiased'>
       <Helmet>
-        <title>Login | SuiteHaven</title>
+        <title>Sign Up | SuiteHaven</title>
       </Helmet>
       <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}/>
-      <LoginSection/>
+      <SignUpSection/>
     </div>
   );
 };
 
-export default Login;
+export default Signup;

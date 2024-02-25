@@ -6,6 +6,8 @@ import RegionSearch from './pages/regionsearch';
 import HotelSearch from './pages/hotelsearch';
 import HotelSummary from './pages/hotelsummary';
 import Login from './pages/login';
+import Signup from './pages/signup';
+import LogoutScreen from './components/logoutscreen';
 
 
 const App = () => {
@@ -61,6 +63,26 @@ const App = () => {
              attached route has no title to load*/}
             </Helmet> 
             <Login />
+          </div>
+        } />
+
+        <Route path="/signup" element={
+          <div>
+            <Helmet>
+            <title>SuiteHaven</title> {/* to default to "SuiteHaven" if 
+             attached route has no title to load*/}
+            </Helmet> 
+            <Signup />
+          </div>
+        } />
+
+        <Route path="/logout" element={
+          <div>
+            <Helmet>
+            <title>SuiteHaven</title> {/* to default to "SuiteHaven" if 
+             attached route has no title to load*/}
+            </Helmet> 
+            <LogoutScreen />
           </div>
         } />
 

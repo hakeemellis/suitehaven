@@ -39,7 +39,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                 <Link to="/myprofile" className="block px-4 py-2 text-sm text-gray-700 dark:text-white
                 hover:bg-zinc-950 hover:text-white dark:hover:bg-slate-100 dark:hover:text-black rounded" role="menuitem" tabIndex="-1">My Profile</Link>
 
-<Link to="/login" className="block px-4 py-2 text-sm text-gray-700 dark:text-white
+                <Link to="/signup" className="block px-4 py-2 text-sm text-gray-700 dark:text-white
                 hover:bg-zinc-950 hover:text-white dark:hover:bg-slate-100 dark:hover:text-black rounded" role="menuitem" tabIndex="-1">Sign Up</Link>
 
                 <Link to="/login" className="block px-4 py-2 text-sm text-gray-700 dark:text-white
