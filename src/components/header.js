@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link component from React Router
+import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate from React Router
+import { getAuth, signOut } from 'firebase/auth'; // Import Firebase auth methods
 import { ReactComponent as SunIcon } from '../assets/images/sun.svg'; // Import SVG for light mode
 import { ReactComponent as MoonIcon } from '../assets/images/moon.svg'; // Import SVG for dark mode
 import { ReactComponent as ProfileIcon } from '../assets/images/profile.svg'; // Import SVG for profile icon
@@ -7,9 +8,26 @@ import { ReactComponent as ProfileIcon } from '../assets/images/profile.svg'; //
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
   const [isProfileOpen, setProfileOpen] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleProfileToggle = () => {
     setProfileOpen(!isProfileOpen);
+  };
+
+  const handleLogout = () => {
+    const auth = getAuth();
+    if (auth.currentUser) {
+      signOut(auth)
+        .then(() => {
+          console.log('User logged out successfully');
+          navigate('/logout'); // Redirect to the logout route
+        })
+        .catch((error) => {
+          console.error('Error signing out:', error.message);
+        });
+    } else {
+      alert("Can't log out. You're not logged in");
+    }
   };
 
   return (
@@ -45,8 +63,9 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                 <Link to="/login" className="block px-4 py-2 text-sm text-gray-700 dark:text-white
                 hover:bg-zinc-950 hover:text-white dark:hover:bg-slate-100 dark:hover:text-black rounded" role="menuitem" tabIndex="-1">Login</Link>
 
-                <Link to="/logout" className="block px-4 py-2 text-sm text-gray-700 dark:text-white
-                hover:bg-zinc-950 hover:text-white dark:hover:bg-slate-100 dark:hover:text-black rounded" role="menuitem" tabIndex="-1">Logout</Link>
+                <button className="container block px-4 py-2 text-sm text-gray-700 dark:text-white
+                hover:bg-zinc-950 hover:text-white dark:hover:bg-slate-100 dark:hover:text-black rounded" role="menuitem" tabIndex="-1" onClick={handleLogout}>Logout
+                </button>
               </div>
             )}
           </div>
