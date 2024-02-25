@@ -36,7 +36,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
               <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white text-black dark:bg-black dark:text-white transition-all 
               duration-500 ease-in-out py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none shadow-md shadow-stone-900 dark:shadow-cyan-950" 
               role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                <Link to="/myprofile" className="block px-4 py-2 text-sm text-gray-700 dark:text-white
+                <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 dark:text-white
                 hover:bg-zinc-950 hover:text-white dark:hover:bg-slate-100 dark:hover:text-black rounded" role="menuitem" tabIndex="-1">My Profile</Link>
 
                 <Link to="/signup" className="block px-4 py-2 text-sm text-gray-700 dark:text-white

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInAnonymously } from 'firebase/auth';
-import { app } from './firebase';
+import { app, db, collection, addDoc } from './firebase';
 
 const SignUpSection = () => {
   const navigate = useNavigate();
@@ -11,6 +11,8 @@ const SignUpSection = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
 
+    const firstName = formData.get('firstName');
+    const lastName = formData.get('lastName');
     const email = formData.get('email');
     const password = formData.get('password');
     const confirmPassword = formData.get('confirmPassword');
@@ -22,8 +24,17 @@ const SignUpSection = () => {
 
     try {
       const auth = getAuth(app);
-      await createUserWithEmailAndPassword(auth, email, password);
-      console.log('User signed up successfully');
+    // Sign up user with email and password
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    console.log('User signed up successfully');
+
+    // Store first and last name in Firestore
+    await addDoc(collection(db, 'users'), {
+      uid: userCredential.user.uid,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+    });
       navigate('/');
     } catch (error) {
       console.error('Error signing up:', error.message);
@@ -31,7 +42,9 @@ const SignUpSection = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
+// eslint-disable-next-line
+  {/* Previous Google Sign In
+    const handleGoogleLogin = async () => {
     try {
       const auth = getAuth(app); // Get the auth instance from your Firebase app
       const provider = new GoogleAuthProvider(); // Create Google auth provider
@@ -42,6 +55,34 @@ const SignUpSection = () => {
       console.error('Error signing in with Google:', error.message);
       alert ('Details are incorrect. Please try again')
       // Handle authentication errors, display error messages, etc.
+    }
+  }; */}
+
+  const handleGoogleLogin = async () => {
+    try {
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
+      const userCredential = await signInWithPopup(auth, provider);
+      console.log('User logged in with Google successfully');
+  
+      // Fetch user's profile information from Google
+      const userProfile = userCredential.additionalUserInfo.profile;
+      const firstName = userProfile.given_name;
+      const lastName = userProfile.family_name;
+      const email = userProfile.email;
+  
+      // Store first and last name in Firestore
+      await addDoc(collection(db, 'users'), {
+        uid: userCredential.user.uid,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+      });
+  
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing in with Google:', error.message);
+      alert('Details are incorrect. Please try again');
     }
   };
 
