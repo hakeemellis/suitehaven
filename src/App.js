@@ -8,6 +8,7 @@ import HotelSummary from './pages/hotelsummary';
 import Login from './pages/login';
 import Signup from './pages/signup';
 import LogoutScreen from './components/logoutscreen';
+import Profile from './pages/profile';
 
 
 const App = () => {
@@ -86,6 +87,15 @@ const App = () => {
           </div>
         } />
 
+        <Route path="/profile" element={
+          <div>
+            <Helmet>
+            <title>SuiteHaven</title> {/* to default to "SuiteHaven" if 
+             attached route has no title to load*/}
+            </Helmet> 
+            <Profile />
+          </div>
+        } />
         {/* Add more routes for other pages */}
       </Routes>
     </Router>
