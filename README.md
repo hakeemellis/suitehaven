@@ -15,6 +15,7 @@ SuiteHaven is a web application designed to help users find the perfect accommod
 - **React**: SuiteHaven is built using the React JavaScript library for building user interfaces.
 - **Tailwind CSS**: The styling of SuiteHaven is achieved using Tailwind CSS, a utility-first CSS framework.
 - **Firebase**: Firebase is used for user authentication and data storage.
+- **REST API**: REST API is used for retrieving the searched information according to the users' criteria.
 - **React Router**: Routing within the application is handled using React Router for navigation.
 
 
