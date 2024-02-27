@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import Link and useNavigate from react-router-dom
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInAnonymously } from 'firebase/auth'; // Import Firebase auth methods
-import { app } from './firebase'; // Import your Firebase config and app instance
+import { app, doc, db, getDoc, setDoc } from './firebase'; // Import your Firebase config and app instance
 
-const LoginSection = () => {
+  const LoginSection = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleEmailLogin = async (event) => {
@@ -26,15 +26,36 @@ const LoginSection = () => {
 
   const handleGoogleLogin = async () => {
     try {
-      const auth = getAuth(app); // Get the auth instance from your Firebase app
-      const provider = new GoogleAuthProvider(); // Create Google auth provider
-      await signInWithPopup(auth, provider); // Sign in user with Google popup
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
+      const userCredential = await signInWithPopup(auth, provider);
       console.log('User logged in with Google successfully');
-      navigate('/'); // Redirect to Home Screen upon successful login
+  
+      // Access the user object from userCredential
+      const user = userCredential.user;
+  
+      // Check if the user already exists in the database
+      const userRef = doc(db, 'users', user.uid);
+      const userDoc = await getDoc(userRef);
+  
+      if (!userDoc.exists()) {
+        // If the user does not exist in the database, store their information
+        const nameArray = user.displayName.split(' ');
+        const firstName = nameArray[0];
+        const lastName = nameArray.length > 1 ? nameArray[nameArray.length - 1] : '';
+  
+        // Store first and last name in Firestore using the UID from authentication
+        await setDoc(userRef, {
+          firstName: firstName,
+          lastName: lastName,
+          email: user.email,
+        });
+      }
+  
+      navigate('/');
     } catch (error) {
       console.error('Error signing in with Google:', error.message);
-      alert ('Details are incorrect. Please try again')
-      // Handle authentication errors, display error messages, etc.
+      alert('Details are incorrect. Please try again');
     }
   };
 
