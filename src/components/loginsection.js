@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom'; // Import Link and useNavigate from react-router-dom
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInAnonymously } from 'firebase/auth'; // Import Firebase auth methods
 import { app, doc, db, getDoc, setDoc } from './firebase'; // Import your Firebase config and app instance
+import { ReactComponent as EyeOffIcon } from '../assets/images/eye-off.svg';
+import { ReactComponent as EyeIcon }from '../assets/images/eye.svg';
 
   const LoginSection = () => {
   const navigate = useNavigate(); // Initialize useNavigate
+  const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleEmailLogin = async (event) => {
     event.preventDefault();
@@ -85,9 +92,12 @@ import { app, doc, db, getDoc, setDoc } from './firebase'; // Import your Fireba
           <label htmlFor="username" className="block mb-2  font-bold">Username</label>
           <input type="text" id="username" name="username" placeholder="Enter your username" className="w-full px-4 py-2 border rounded-md focus:outline-none text-black" required />
         </div>
-        <div className="mb-4">
+        <div className="mb-4 relative">
           <label htmlFor="password" className="block mb-2 font-bold">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password" className="w-full px-4 py-2 border rounded-md focus:outline-none text-black" required />
+          <input type={showPassword ? "text" : "password"} id="password" name="password" placeholder="Enter your password" className="w-full px-4 py-2 border rounded-md focus:outline-none text-black" required />
+          <button type="button" className="absolute inset-y-0 right-0 px-3 py-2 flex items-center mt-7" onClick={togglePasswordVisibility}> {/* Add flex and items-center classes */}
+            {showPassword ? <EyeOffIcon className="h-6 w-6 text-gray-400" /> : <EyeIcon className="h-6 w-6 text-gray-400" />}
+          </button>
         </div>
         <button type="submit" className="block w-full px-4 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none">Login</button>
         <p className='text-center text-xl font-semibold mt-2 '>or</p>

@@ -106,6 +106,15 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     }
   };
 
+  const handleProfileClick = () => {
+    if (!user) {
+      alert("You're not logged in. Will not work.");
+    } 
+    else {
+      console.log('Will work')
+    }
+  };
+
   return (
     <header>
       {/* Desktop Navbar */}
@@ -118,7 +127,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           <Link to="/" className="text-xl font-semibold">SuiteHaven</Link>
           <div className="flex flex-grow justify-center">
             <Link to="/" className="text-md font-bold mx-4">Home</Link>
-            <Link to='/profile' className="text-md font-bold mx-4">Profile</Link>
+            <Link to='/profile' className="text-md font-bold mx-4" onClick={handleProfileClick}>Profile</Link>
             <Link to='/hotelsearch' className="text-md font-bold mx-4" onClick={handleSuiteListingClick}>Suite Listing</Link>
           </div>
           <div className="relative">
