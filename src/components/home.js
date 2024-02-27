@@ -1,5 +1,6 @@
 // src/components/Home.js
-import React from 'react';
+// eslint-disable-next-line 
+{/* import React from 'react';
 
 const Home = () => {
   return (
@@ -18,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home; */}

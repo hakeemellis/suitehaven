@@ -1,7 +1,8 @@
 // src/components/Search.js
 import React, {useState, useEffect} from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {HotelAPI} from './hotelapi';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const Search = () => {
 
@@ -10,6 +11,7 @@ const Search = () => {
   const [checkOutDate, setCheckOutDate] = useState('');
   const [guests, setGuests] = useState('');
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if the current route is "/"
@@ -36,6 +38,22 @@ const Search = () => {
   };
 
   const handleSearchClick = async () => {
+    try {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          searchHotels();
+        } else {
+          alert("Sorry, you need to choose a sign-in option first");
+          navigate("/login");
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const searchHotels = async () => {
     try {
       // Call the HotelAPI with the entered destination
       const result = await HotelAPI(destination);

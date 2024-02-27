@@ -60,7 +60,11 @@ const RegionResults = () => {
 
   // Render loading indicator while data is being fetched
   if (loading) {
-    return <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-4xl font-semibold'>Loading...</div>;
+    return (
+      <div className="dark:bg-black dark:text-white absolute top-0 left-0 w-full h-full flex justify-center items-center">
+        <div className="text-center text-4xl font-semibold">Loading...</div>
+      </div>
+    );
   }
 
   // Render nothing if jsonData or userQuery is null (waiting for data to load)
@@ -75,7 +79,7 @@ const RegionResults = () => {
         <div className="absolute top-0 left-0 w-full h-full dark:bg-black bg-white transition-all duration-500 ease-in-out z-0"></div>
         <div className={`relative z-10 dark:bg-zinc-950 dark:text-white bg-slate-50 text-black transition-all duration-500 ease-in-out
             flex flex-col items-center justify-center p-15 my-20 top-10 mx-auto max-w-5xl text-center 
-            rounded-2xl shadow-2xl dark:shadow-zinc-900 opacity-85`}>
+            rounded-2xl shadow-2xl shadow-zinc-350 dark:shadow-zinc-900 opacity-85`}>
             <br/>
             <h1 className='text-3xl text-center font-semibold'>Region Search</h1>
             <br/>

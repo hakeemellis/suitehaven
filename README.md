@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# SuiteHaven
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SuiteHaven is a web application designed to help users find the perfect accommodations for their travel needs. Whether you're planning a weekend getaway or a long-term stay, SuiteHaven provides a seamless experience for discovering and booking hotels.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **User Authentication**: Secure user authentication powered by Firebase Authentication ensures that your personal information is kept safe.
+- **Search Functionality**: Easily search for hotels based on location, dates, and other preferences to find the perfect accommodation for your trip.
+- **Detailed Hotel Information**: Get detailed information about each hotel, including amenities, reviews, and photos, to make an informed decision.
+- **Dark Mode**: Enjoy SuiteHaven in a dark theme for reduced eye strain and improved visibility in low-light environments.
+- **Responsive Design**: SuiteHaven is designed to work seamlessly across all devices, including desktops, tablets, and smartphones.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React**: SuiteHaven is built using the React JavaScript library for building user interfaces.
+- **Tailwind CSS**: The styling of SuiteHaven is achieved using Tailwind CSS, a utility-first CSS framework.
+- **Firebase**: Firebase is used for user authentication and data storage.
+- **React Router**: Routing within the application is handled using React Router for navigation.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Sign up for an account or log in if you already have one.
+2. Use the search functionality to find hotels based on your preferences.
+3. View detailed information about each hotel, including amenities, reviews, and photos.
+4. Book your stay at the hotel of your choice.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## License
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project is licensed under the terms of the [Custom Code Usage License](LICENSE.md). For licensing inquiries or permissions, please contact me through github or through the form on https://hakeemellis.com/.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

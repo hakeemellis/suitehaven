@@ -33,7 +33,11 @@ const HotelResults = () => {
 
   // Show loading screen if data is still being fetched
   if (loading) {
-    return <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-4xl font-semibold'>Loading...</div>;
+    return (
+      <div className="dark:bg-black dark:text-white absolute top-0 left-0 w-full h-full flex justify-center items-center">
+        <div className="text-center text-4xl font-semibold">Loading...</div>
+      </div>
+    );
   }
 
   const handleResultClick = (hotelId) => {
@@ -45,7 +49,7 @@ const HotelResults = () => {
       <div className="max-w-3xl w-full">
         {hotelData.slice(0, displayCount).map((property, index) => (
           <Link key={index} to={`/hotelsearch/hotelsummary`} onClick={() => handleResultClick(property.id)}>
-          <div className="bg-slate-100 dark:bg-zinc-950 rounded-md flex items-center justify-center p-4 mb-7 mt-3 shadow-md dark:shadow-cyan-950">
+          <div className="bg-slate-50 dark:bg-zinc-950 rounded-md flex items-center justify-center p-4 mb-7 mt-3 shadow-md shadow-zinc-300 dark:shadow-cyan-950">
             <div className="w-1/4 h-full overflow-hidden rounded-l-md">
               <img src={property.propertyImage?.image?.url || "placeholder-image.jpg"} alt={property.name} className="w-full h-full object-cover" />
             </div>

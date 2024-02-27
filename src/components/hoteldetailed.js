@@ -107,7 +107,11 @@ const HotelDetailed = () => {
   };
 
   if (loading) {
-    return <div className="text-center text-4xl font-semibold">Loading...</div>;
+    return (
+      <div className="dark:bg-black dark:text-white absolute top-0 left-0 w-full h-full flex justify-center items-center">
+        <div className="text-center text-4xl font-semibold">Loading...</div>
+      </div>
+    );
   }
 
   if (error) {
@@ -118,7 +122,7 @@ const HotelDetailed = () => {
     <section className="dark:bg-black dark:text-white bg-white text-black p-4 transition-all duration-500 ease-in-out container mx-auto shadow-md m-0 min-h-screen">
     {/* Hero Section */}
     <div className="flex flex-col items-center mb-8">
-      <section className="text-center dark:bg-zinc-950 bg-slate-100 shadow-md dark:shadow-cyan-950 transition-all duration-500 ease-in-out max-w-6xl">
+      <section className="text-center dark:bg-zinc-950 bg-white shadow-md shadow-zinc-300 dark:shadow-cyan-950 transition-all duration-500 ease-in-out max-w-6xl">
         {/* Display images */}
         <div className="flex mb-4 shadow-sm">
           {hotelImages.slice(0, 4).map((image, index) => (
@@ -149,7 +153,7 @@ const HotelDetailed = () => {
       </section>
       {/* End of Hero Section */}
       {/* About this property section */}
-      <section className="text-left dark:bg-zinc-950 bg-slate-100 shadow-md dark:shadow-cyan-950 transition-all duration-500 ease-in-out p-4 mt-8 container mx-auto max-w-6xl">
+      <section className="text-left dark:bg-zinc-950 bg-white shadow-md shadow-zinc-300 dark:shadow-cyan-950 transition-all duration-500 ease-in-out p-4 mt-8 container mx-auto max-w-6xl">
         <h2 className="text-2xl font-semibold mb-2">About this property:</h2>
         <div>{aboutProperty}</div>
         <h2 className="text-2xl font-semibold mb-2 mt-6">Languages:</h2>
@@ -157,7 +161,7 @@ const HotelDetailed = () => {
       </section>
 
       {/* Policies */}
-      <section className="text-left dark:bg-zinc-950 bg-slate-100 shadow-md dark:shadow-cyan-950 transition-all duration-500 ease-in-out p-4 mt-8 container mx-auto max-w-6xl">
+      <section className="text-left dark:bg-zinc-950 bg-white shadow-md dark:shadow-cyan-950 transition-all duration-500 ease-in-out p-4 mt-8 container mx-auto max-w-6xl">
         <h2 className='text-2xl font-semibold mb-3'>{aboutHeaderText}</h2>
         <div>{aboutPolicies.map(policy => parse(policy))}</div>
         <h2 className='text-2xl font-semibold mt-8 mb-3'>{aboutExtras}</h2>
