@@ -5,10 +5,15 @@ import { ReactComponent as SunIcon } from '../assets/images/sun.svg';
 import { ReactComponent as MoonIcon } from '../assets/images/moon.svg';
 import { ReactComponent as ProfileIcon } from '../assets/images/profile.svg';
 import { db, getDoc, doc } from './firebase'; // Importing the Firestore instance from firebase.js
+import './header.css'
+
 
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   const [isProfileOpen, setProfileOpen] = useState(false);
   const [user, setUser] = useState(null); // State to store user information
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth <= 767);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -115,6 +120,24 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     }
   };
 
+   // Function to check and update the screen size
+   const checkScreenSize = () => {
+    setIsMobileScreen(window.innerWidth <= 767);
+  };
+
+  useEffect(() => {
+    // Add an event listener for window resize
+    window.addEventListener('resize', checkScreenSize);
+    return () => {
+      // Clean up the event listener on component unmount
+      window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <header>
       {/* Desktop Navbar */}
@@ -125,11 +148,37 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         {/* Container for NavBar Elements */}
         <div className="container mx-auto flex items-center justify-between">
           <Link to="/" className="text-xl font-semibold">SuiteHaven</Link>
-          <div className="flex flex-grow justify-center">
-            <Link to="/" className="text-md font-bold mx-4">Home</Link>
-            <Link to='/profile' className="text-md font-bold mx-4" onClick={handleProfileClick}>Profile</Link>
-            <Link to='/hotelsearch' className="text-md font-bold mx-4" onClick={handleSuiteListingClick}>Suite Listing</Link>
-          </div>
+
+            {/* Hamburger Mobile Menu Button */}
+            <button className={`md:hidden absolute top-1/2 transform -translate-y-1/2 left-0 right-0 mx-auto flex items-center justify-center transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-90' : ''}`} onClick={toggleMobileMenu}>
+              {/* Replace with your SVG icon */}
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-7 w-7 text-black dark:text-white cursor-pointer">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </button>
+
+
+            {/* Render the mobile menu only for small screens */}
+            {isMobileScreen && isMobileMenuOpen && (
+             <div className="md:hidden absolute bg-black p-4 rounded-md shadow-md top-20 left-1/2 transform -translate-x-1/2">
+              {/* Mobile menu content */}
+              <div className="flex flex-col gap-2">
+                <Link to="/" className="text-md font-bold">Home</Link>
+                <Link to='/profile' className="text-md font-bold" onClick={handleProfileClick}>Profile</Link>
+                <Link to='/hotelsearch' className="text-md font-bold" onClick={handleSuiteListingClick}>Suite Listing</Link>
+              </div>
+            </div>
+            )}
+
+            {/* Render the desktop menu only for large screens */}
+            {!isMobileScreen && (
+            <div className="flex flex-grow justify-center">
+              <Link to="/" className="text-md font-bold mx-4">Home</Link>
+              <Link to='/profile' className="text-md font-bold mx-4" onClick={handleProfileClick}>Profile</Link>
+              <Link to='/hotelsearch' className="text-md font-bold mx-4" onClick={handleSuiteListingClick}>Suite Listing</Link>
+            </div>
+            )}
+
           <div className="relative">
             <button className="px-4 py-2" onClick={handleProfileToggle}>
               <ProfileIcon className="w-8 h-8" />
@@ -158,12 +207,12 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                 )}
               </div>
             )}
-          </div>
-          <div>
+          
+          
             <button className="px-4 py-2" onClick={toggleDarkMode}>
               {isDarkMode ? <SunIcon className="w-8 h-8" /> : <MoonIcon className="w-8 h-8" />}
             </button>
-          </div>
+            </div>
         </div>
       </nav>
     </header>
