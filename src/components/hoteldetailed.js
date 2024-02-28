@@ -117,7 +117,7 @@ const HotelDetailed = () => {
 
   useEffect(() => {
     const checkScreenWidth = () => {
-      const isMobile = window.innerWidth <= 767; // Adjust the threshold as needed
+      const isMobile = window.innerWidth <= 1024; // Adjust the threshold as needed
       if (isMobile) {
         setInitialImageCount(1);
       } else {
@@ -147,7 +147,7 @@ const HotelDetailed = () => {
   }
 
   return (
-    <section className="dark:bg-black dark:text-white bg-white text-black p-4 transition-all duration-500 ease-in-out container mx-auto shadow-md m-0 min-h-screen">
+    <section className="dark:bg-black dark:text-white bg-white text-black p-4 transition-all duration-500 ease-in-out mx-auto shadow-md m-0 min-h-screen">
     {/* Hero Section */}
     <div className="flex flex-col items-center mb-8">
       <section className="text-center dark:bg-zinc-950 bg-white shadow-md shadow-zinc-300 dark:shadow-cyan-950 transition-all duration-500 ease-in-out max-w-6xl">

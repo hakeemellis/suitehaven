@@ -77,7 +77,7 @@ const RegionResults = () => {
 
   // Render the component when jsonData and userQuery are available
   return (
-    <section className='relative overflow-hidden'>
+    <section className='relative overflow-hidden h-screen'>
         {/* Dark overlay */}
         <div className="absolute top-0 left-0 w-full h-full dark:bg-black bg-white transition-all duration-500 ease-in-out z-0"></div>
         <div className={`relative z-10 dark:bg-zinc-950 dark:text-white bg-slate-50 text-black transition-all duration-500 ease-in-out

@@ -45,7 +45,7 @@ const HotelResults = () => {
   };
 
   return (
-    <section className="dark:bg-black dark:text-white bg-white text-black p-4 transition-all duration-500 ease-in-out container mx-auto flex items-start justify-center shadow-md m-0 min-h-screen relative z-20">
+    <section className="dark:bg-black dark:text-white bg-white text-black p-4 transition-all duration-500 ease-in-out mx-auto flex items-start justify-center shadow-md m-0 min-h-screen relative z-20">
       <div className="max-w-3xl w-full">
         {hotelData.slice(0, displayCount).map((property, index) => (
           <Link key={index} to={`/hotelsearch/hotelsummary`} onClick={() => handleResultClick(property.id)}>

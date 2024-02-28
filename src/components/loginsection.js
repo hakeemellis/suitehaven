@@ -93,7 +93,7 @@ import { ReactComponent as EyeIcon }from '../assets/images/eye.svg';
 
   return (
     <section className={`dark:bg-zinc-950 dark:text-white bg-white text-black p-4 
-        transition-all duration-500 ease-in-out container mx-auto flex
+        transition-all duration-500 ease-in-out mx-auto flex
         ${isMobileScreen ? 'flex-col' : 'flex-row'} items-center justify-center 
         shadow-md m-0 min-h-screen`}>
       <div className="text-center container">
