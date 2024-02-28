@@ -4,11 +4,14 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css'; // Import your global styles
 import reportWebVitals from './reportWebVitals';
+import ErrorBoundary from './components/errorboundary';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ErrorBoundary>
     <App />
+    </ErrorBoundary>
   </React.StrictMode>,
 );
 

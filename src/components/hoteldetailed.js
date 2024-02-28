@@ -18,6 +18,7 @@ const HotelDetailed = () => {
   const [showModal, setShowModal] = useState(false);
   const [amenities, setAmenities] = useState([]);
   const [initialImageCount, setInitialImageCount] = useState(''); // Initial image count for desktop
+  const [alertTriggered, setAlertTriggered] = useState(false)
 
   useEffect(() => {
     const fetchHotelDetails = async () => {
@@ -100,7 +101,14 @@ const HotelDetailed = () => {
   }, []);
 
   const handleShowMore = () => {
+    if (!alertTriggered) {
+      alert(`You'll have to close this modal and reclick the button to see all images`);
+      setAlertTriggered(true);
+      setShowModal (true)
+    }
+    else{
     setShowModal(true);
+    }
   };
 
   const handleCloseModal = () => {
@@ -150,11 +158,12 @@ const HotelDetailed = () => {
           ))}
         </div>
         {/* Show more button */}
-        {hotelImages.length > 4 && (
-          <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded" onClick={handleShowMore}>
-            Show me more
-          </button>
-        )}
+        <button 
+          className={`bg-blue-500 text-white font-bold py-2 px-4 rounded ${hotelImages.length <= 4 ? 'opacity-50 cursor-not-allowed' : ''}`} 
+          onClick={handleShowMore} 
+          disabled={hotelImages.length <= 4}>
+          Show me more
+        </button>
         {/* Display hotel name */}
         <h1 className="text-6xl font-bold mb-4 mt-10">{hotelName}</h1>
         {/* Display hotel review score */}

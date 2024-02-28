@@ -15,7 +15,7 @@ const RegionResults = () => {
     }
 
     // Check if the component is mounted on the route "/regionsearch"
-    const isRegionSearch = window.location.pathname === '/regionsearch';
+    const isRegionSearch = window.location.pathname === '/suitehaven/regionsearch';
 
     // Check if the refresh hasn't occurred yet in this session or if sessionStorage refreshed value is false
     const refreshFlag = sessionStorage.getItem('refreshed');
