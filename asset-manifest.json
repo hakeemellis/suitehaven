@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/suitehaven/static/css/main.934877d2.css",
+    "main.js": "/suitehaven/static/js/main.c848988d.js",
+    "static/js/787.a9cc8ac8.chunk.js": "/suitehaven/static/js/787.a9cc8ac8.chunk.js",
+    "static/media/eye-off.svg": "/suitehaven/static/media/eye-off.3d8bf6ad233db3113b6e8b301b5441e0.svg",
+    "static/media/profile.svg": "/suitehaven/static/media/profile.e06b1181bc690311e3adba3d22c93f89.svg",
+    "static/media/sun.svg": "/suitehaven/static/media/sun.a96e280488bc470ee91de4c70cd93d0c.svg",
+    "static/media/eye.svg": "/suitehaven/static/media/eye.b33b1e0df4d42f860bf24fb0957d664e.svg",
+    "index.html": "/suitehaven/index.html",
+    "static/media/moon.svg": "/suitehaven/static/media/moon.5a635996c6b52778c1b94186412cd138.svg",
+    "main.934877d2.css.map": "/suitehaven/static/css/main.934877d2.css.map",
+    "main.c848988d.js.map": "/suitehaven/static/js/main.c848988d.js.map",
+    "787.a9cc8ac8.chunk.js.map": "/suitehaven/static/js/787.a9cc8ac8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.934877d2.css",
+    "static/js/main.c848988d.js"
+  ]
+}
