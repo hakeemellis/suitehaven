@@ -10,6 +10,7 @@ const MyProfilePage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [photoURL, setPhotoURL] = useState('');
+  const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth <= 767)
 
   // Fetch user profile data from Firestore
   useEffect(() => {
@@ -54,14 +55,26 @@ const MyProfilePage = () => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileScreen(window.innerWidth <= 767);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <section className={`dark:bg-zinc-950 dark:text-white bg-white text-black p-4 
         transition-all duration-500 ease-in-out container mx-auto flex items-center justify-center 
         shadow-md m-0 min-h-screen`}>
-      <div className="container flex flex-row items-center justify-center">
-        <div className="mr-8">
-          <img src={photoURL || 'default-profile-photo.jpg'} alt="Profile" className="w-60 h-60 rounded-full border-4" />
-          <input type="file" accept="image/*" onChange={handlePhotoUpload} className="mt-4" />
+      <div className={`flex ${isMobileScreen ? 'flex-col' : 'flex-row'} mx-auto items-center justify-center`}>
+        <div className="">
+          <img src={photoURL || 'default-profile-photo.jpg'} alt="Profile" className="w-60 h-60 rounded-full border-4 flex mx-auto mb-5" />
+          <input type="file" accept="image/*" onChange={handlePhotoUpload} className="mt-1 mb-5" />
         </div>
         <div>
           <div className="mb-4">

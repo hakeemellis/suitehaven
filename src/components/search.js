@@ -83,7 +83,7 @@ const Search = () => {
         
         {/* Video Within Hero Banner */}
         <video className="absolute top-0 left-0 w-full h-full object-cover z-1" 
-        autoPlay muted loop>
+        autoPlay playsInline muted loop>
           <source src="/assets/videos/test2.mp4" type="video/mp4" />
           <source src="/assets/videos/test2.webm" type="video/webm" />
           <source src="/assets/videos/test2.ogv" type="video/ogg" />

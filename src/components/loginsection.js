@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom'; // Import Link and useNavigate from react-router-dom
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInAnonymously } from 'firebase/auth'; // Import Firebase auth methods
 import { app, doc, db, getDoc, setDoc } from './firebase'; // Import your Firebase config and app instance
@@ -8,6 +8,7 @@ import { ReactComponent as EyeIcon }from '../assets/images/eye.svg';
   const LoginSection = () => {
   const navigate = useNavigate(); // Initialize useNavigate
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
+  const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth <= 767)
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -78,9 +79,22 @@ import { ReactComponent as EyeIcon }from '../assets/images/eye.svg';
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileScreen(window.innerWidth <= 767);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <section className={`dark:bg-zinc-950 dark:text-white bg-white text-black p-4 
-        transition-all duration-500 ease-in-out container mx-auto flex items-center justify-center 
+        transition-all duration-500 ease-in-out container mx-auto flex
+        ${isMobileScreen ? 'flex-col' : 'flex-row'} items-center justify-center 
         shadow-md m-0 min-h-screen`}>
       <div className="text-center container">
         <h1 className="text-6xl font-bold mb-4">SuiteHaven</h1>
