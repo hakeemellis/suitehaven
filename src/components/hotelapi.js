@@ -3,7 +3,7 @@
 const HotelAPI = async (userQuery) => {
   const url = `https://hotels-com-provider.p.rapidapi.com/v2/regions?query=${encodeURIComponent(userQuery)}&domain=US&locale=en_US`;
   const headers = {
-    'X-RapidAPI-Key': '8bd5cecc54mshd6bc34c135a908cp19df6djsn68c15ab7ab1c', // Replace with your RapidAPI key
+    'X-RapidAPI-Key': 'dd636b0e44msh375b13d4a72073bp1bc46djsnbba31f381727', // Replace with your RapidAPI key
     'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
   };
 
@@ -19,7 +19,7 @@ const HotelAPI = async (userQuery) => {
 const HotelResultsAPI = async (regionId, checkInDate, checkOutDate) => {
   const url = `https://hotels-com-provider.p.rapidapi.com/v2/hotels/search?region_id=${regionId}&locale=en_US&checkin_date=${checkInDate}&sort_order=RECOMMENDED&adults_number=1&domain=US&checkout_date=${checkOutDate}`;
   const headers = {
-    'X-RapidAPI-Key': '8bd5cecc54mshd6bc34c135a908cp19df6djsn68c15ab7ab1c', // Replace with your RapidAPI key
+    'X-RapidAPI-Key': 'dd636b0e44msh375b13d4a72073bp1bc46djsnbba31f381727', // Replace with your RapidAPI key
     'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
   };
 
@@ -38,7 +38,7 @@ const HotelSummaryAPI = async (hotelId) => {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '8bd5cecc54mshd6bc34c135a908cp19df6djsn68c15ab7ab1c',
+      'X-RapidAPI-Key': 'dd636b0e44msh375b13d4a72073bp1bc46djsnbba31f381727',
       'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
     }
   };
@@ -62,7 +62,7 @@ const HotelInfoAPI = async (hotelId) => {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '8bd5cecc54mshd6bc34c135a908cp19df6djsn68c15ab7ab1c',
+      'X-RapidAPI-Key': 'dd636b0e44msh375b13d4a72073bp1bc46djsnbba31f381727',
       'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
     }
   };
@@ -81,7 +81,7 @@ const HotelDetailsAPI = async (hotelId) => {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '8bd5cecc54mshd6bc34c135a908cp19df6djsn68c15ab7ab1c',
+      'X-RapidAPI-Key': 'dd636b0e44msh375b13d4a72073bp1bc46djsnbba31f381727',
       'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
     }
   };
