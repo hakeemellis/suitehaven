@@ -14,7 +14,7 @@ import Profile from './pages/profile';
 const App = () => {
   return (
   <HelmetProvider>
-    <Router>
+    <Router basename="/suitehaven">
       <Routes>
         <Route path="/" element={           
           <div>
