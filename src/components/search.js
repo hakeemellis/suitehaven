@@ -118,11 +118,11 @@ const Search = () => {
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-6 py-3 border rounded-xl focus:outline-none`}/>
 
-                    <input type="date" placeholder='Check-In Date' value={checkInDate} onChange={handleCheckInDateChange} min={today}
+                    <input type="date" placeholder="Check-In Date" value={checkInDate} onChange={handleCheckInDateChange} min={today}
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-4 py-3 border rounded-xl focus:outline-none`}/>
 
-                    <input type="date" placeholder='Check-Out Date' value={checkOutDate} onChange={handleCheckOutDateChange} min={today}
+                    <input type="date" placeholder="Check-Out Date" value={checkOutDate} onChange={handleCheckOutDateChange} min={today}
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-4 py-3 border rounded-xl focus:outline-none`}/>
 
