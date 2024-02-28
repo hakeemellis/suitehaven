@@ -114,7 +114,7 @@ const Search = () => {
 
         {/* Search Section */}
         <section className={`relative z-0 dark:bg-zinc-950 dark:text-white bg-white text-black transition-all duration-500 ease-in-out
-            flex flex-col items-center justify-center p-15 my-20 top-10 mx-auto max-w-5xl text-center 
+            flex flex-col items-center justify-center p-15 my-20 top-10 mx-auto lg:max-w-5xl md:max-w-2xl text-center 
             rounded-2xl shadow-2xl dark:shadow-zinc-900 opacity-85`}>
           
             {/* Inner Section within Search */}
@@ -127,11 +127,11 @@ const Search = () => {
                 <br/>
                 
                 {/* The Search Bar */}
-                <section className="flex flex-col sm:flex-row items-center justify-center gap-x-2 gap-y-2">
+                <section className="flex flex-col lg:flex-row items-center justify-center gap-x-2 gap-y-2">
 
                   {/* Elements within the Search Bar */}
                     <input type="text" placeholder="Destination" value={destination} onChange={handleInputChange}
-                    className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
+                    className= {`dark:bg-zinc-900 dark:text-white text-center bg-white text-black transition-all duration-500 ease-in-out 
                     px-6 py-3 border rounded-xl focus:outline-none`}/>
 
                     <DatePicker
@@ -139,7 +139,7 @@ const Search = () => {
                       onChange={date => handleCheckInDateChange(date)}
                       minDate={new Date()}
                       placeholderText="Check-In Date"
-                      className="dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
+                      className="dark:bg-zinc-900 dark:text-white text-center bg-white text-black transition-all duration-500 ease-in-out 
                       px-4 py-3 border rounded-xl focus:outline-none"
                     />
 
@@ -148,7 +148,7 @@ const Search = () => {
                       onChange={date => handleCheckOutDateChange(date)}
                       minDate={new Date()}
                       placeholderText="Check-Out Date"
-                      className="dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
+                      className="dark:bg-zinc-900 dark:text-white text-center bg-white text-black transition-all duration-500 ease-in-out 
                       px-4 py-3 border rounded-xl focus:outline-none"
                     />
 
