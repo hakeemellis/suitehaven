@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+// Previously it was BrowserRouter but changed it HashRouter for GitHub Pages
 import HomePage from './pages/homepage'; 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import RegionSearch from './pages/regionsearch';
@@ -14,7 +15,7 @@ import Profile from './pages/profile';
 const App = () => {
   return (
   <HelmetProvider>
-    <Router basename="/suitehaven">
+    <Router> {/* Previously was <Router basename="/suitehaven"> for BrowserRouter to work */}
       <Routes>
         <Route path="/" element={           
           <div>
