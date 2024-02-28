@@ -17,6 +17,7 @@ const HotelDetailed = () => {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [amenities, setAmenities] = useState([]);
+  const [initialImageCount, setInitialImageCount] = useState(''); // Initial image count for desktop
 
   useEffect(() => {
     const fetchHotelDetails = async () => {
@@ -106,6 +107,25 @@ const HotelDetailed = () => {
     setShowModal(false);
   };
 
+  useEffect(() => {
+    const checkScreenWidth = () => {
+      const isMobile = window.innerWidth <= 767; // Adjust the threshold as needed
+      if (isMobile) {
+        setInitialImageCount(1);
+      } else {
+        setInitialImageCount(4);
+      }
+    };
+
+    checkScreenWidth();
+
+    window.addEventListener('resize', checkScreenWidth);
+
+    return () => {
+      window.removeEventListener('resize', checkScreenWidth);
+    };
+  }, []);
+
   if (loading) {
     return (
       <div className="dark:bg-black dark:text-white absolute top-0 left-0 w-full h-full flex justify-center items-center">
@@ -125,8 +145,8 @@ const HotelDetailed = () => {
       <section className="text-center dark:bg-zinc-950 bg-white shadow-md shadow-zinc-300 dark:shadow-cyan-950 transition-all duration-500 ease-in-out max-w-6xl">
         {/* Display images */}
         <div className="flex mb-4 shadow-sm">
-          {hotelImages.slice(0, 4).map((image, index) => (
-            <img key={index} src={image.image.url} alt={`${index}`} className="w-64 h-64 object-cover m-2 shadow-sm" />
+        {hotelImages.slice(0, initialImageCount).map((image, index) => (
+            <img key={index} src={image.image.url} alt={`${index}`} className="w-64 h-64 object-cover m-2 shadow-sm flex mx-auto" />
           ))}
         </div>
         {/* Show more button */}
