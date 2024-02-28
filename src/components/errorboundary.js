@@ -20,7 +20,9 @@ class ErrorBoundary extends Component {
       // Render the fallback UI
       return (
         <div style={{ backgroundColor: '#fff', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <p>Sorry, the app has crashed. Return to <a href="/">home</a>.</p>
+          <div style={{ margin: '0 auto', textAlign: 'center' }}>
+            <p>Sorry, the app has crashed. <b><a href="/">Click here to return to home</a>.</b></p>
+          </div>
         </div>
       );
     }

@@ -3,6 +3,9 @@ import React, {useState, useEffect} from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {HotelAPI} from './hotelapi';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 const Search = () => {
 
@@ -25,12 +28,25 @@ const Search = () => {
     setDestination(event.target.value);
   };
 
+// eslint-disable-next-line
+{/* HTML 5 Way with Code Below
+
   const handleCheckInDateChange = (event) => {
     setCheckInDate(event.target.value);
   };
 
   const handleCheckOutDateChange = (event) => {
     setCheckOutDate(event.target.value);
+  }; */}
+
+  const handleCheckInDateChange = (date) => {
+    const formattedDate = date.toISOString().split('T')[0]; // Extract YYYY-MM-DD from ISO string
+    setCheckInDate(formattedDate);
+  };
+  
+  const handleCheckOutDateChange = (date) => {
+    const formattedDate = date.toISOString().split('T')[0]; // Extract YYYY-MM-DD from ISO string
+    setCheckOutDate(formattedDate);
   };
 
   const handleGuestsChange = (event) => {
@@ -75,7 +91,7 @@ const Search = () => {
   };
 
   // Get today's date in the format "YYYY-MM-DD"
-  const today = new Date().toISOString().split('T')[0];
+  //const today = new Date().toISOString().split('T')[0]; - Due to React Date Picker
   
   return (
 
@@ -118,17 +134,38 @@ const Search = () => {
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-6 py-3 border rounded-xl focus:outline-none`}/>
 
+                    <DatePicker
+                      selected={checkInDate}
+                      onChange={date => handleCheckInDateChange(date)}
+                      minDate={new Date()}
+                      placeholderText="Check-In Date"
+                      className="dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
+                      px-4 py-3 border rounded-xl focus:outline-none"
+                    />
+
+                    <DatePicker
+                      selected={checkOutDate}
+                      onChange={date => handleCheckOutDateChange(date)}
+                      minDate={new Date()}
+                      placeholderText="Check-Out Date"
+                      className="dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
+                      px-4 py-3 border rounded-xl focus:outline-none"
+                    />
+
+                    {/* Made Obsolete due to React Date Picker || This Method relies on HTML 5
+
                     <input type="date" placeholder="Check-In Date" value={checkInDate} onChange={handleCheckInDateChange} min={today}
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-4 py-3 border rounded-xl focus:outline-none`}/>
 
                     <input type="date" placeholder="Check-Out Date" value={checkOutDate} onChange={handleCheckOutDateChange} min={today}
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
-                    px-4 py-3 border rounded-xl focus:outline-none`}/>
+                    px-4 py-3 border rounded-xl focus:outline-none`}/>*/}
 
                     <input type="number" placeholder="Guests" value={guests} onChange={handleGuestsChange}
                     className= {`dark:bg-zinc-900 dark:text-white bg-white text-black transition-all duration-500 ease-in-out 
                     px-1 py-3 border rounded-xl focus:outline-none items-center text-center`}/>
+                  
 
                     <Link to="/regionsearch">
                     <button
