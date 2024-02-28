@@ -160,7 +160,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
             {/* Render the mobile menu only for small screens */}
             {isMobileScreen && isMobileMenuOpen && (
-             <div className="md:hidden absolute bg-black p-4 rounded-md shadow-md top-20 left-1/2 transform -translate-x-1/2">
+             <div className="md:hidden absolute dark:bg-black bg-white p-4 rounded-md shadow-md dark:shadow-zinc-900 shadow-zinc-300 top-20 left-1/2 transform -translate-x-1/2">
               {/* Mobile menu content */}
               <div className="flex flex-col gap-2">
                 <Link to="/" className="text-md font-bold">Home</Link>
