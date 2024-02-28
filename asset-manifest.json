@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/suitehaven/static/css/main.a75001fa.css",
-    "main.js": "/suitehaven/static/js/main.0d47f3df.js",
+    "main.css": "/suitehaven/static/css/main.107982aa.css",
+    "main.js": "/suitehaven/static/js/main.c7db48c6.js",
     "static/js/787.a9cc8ac8.chunk.js": "/suitehaven/static/js/787.a9cc8ac8.chunk.js",
     "static/media/eye-off.svg": "/suitehaven/static/media/eye-off.3d8bf6ad233db3113b6e8b301b5441e0.svg",
     "static/media/profile.svg": "/suitehaven/static/media/profile.e06b1181bc690311e3adba3d22c93f89.svg",
@@ -9,12 +9,12 @@
     "static/media/eye.svg": "/suitehaven/static/media/eye.b33b1e0df4d42f860bf24fb0957d664e.svg",
     "index.html": "/suitehaven/index.html",
     "static/media/moon.svg": "/suitehaven/static/media/moon.5a635996c6b52778c1b94186412cd138.svg",
-    "main.a75001fa.css.map": "/suitehaven/static/css/main.a75001fa.css.map",
-    "main.0d47f3df.js.map": "/suitehaven/static/js/main.0d47f3df.js.map",
+    "main.107982aa.css.map": "/suitehaven/static/css/main.107982aa.css.map",
+    "main.c7db48c6.js.map": "/suitehaven/static/js/main.c7db48c6.js.map",
     "787.a9cc8ac8.chunk.js.map": "/suitehaven/static/js/787.a9cc8ac8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a75001fa.css",
-    "static/js/main.0d47f3df.js"
+    "static/css/main.107982aa.css",
+    "static/js/main.c7db48c6.js"
   ]
 }
