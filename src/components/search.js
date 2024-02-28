@@ -127,7 +127,7 @@ const Search = () => {
                 <br/>
                 
                 {/* The Search Bar */}
-                <section className="flex flex-col lg:flex-row items-center justify-center gap-x-2 gap-y-2">
+                <section className="flex flex-col lg:flex-row items-center justify-center gap-x-1.5 gap-y-1.5">
 
                   {/* Elements within the Search Bar */}
                     <input type="text" placeholder="Destination" value={destination} onChange={handleInputChange}

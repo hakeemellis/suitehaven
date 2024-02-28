@@ -69,7 +69,7 @@ const MyProfilePage = () => {
 
   return (
     <section className={`dark:bg-zinc-950 dark:text-white bg-white text-black p-4 
-        transition-all duration-500 ease-in-out container mx-auto flex items-center justify-center 
+        transition-all duration-500 ease-in-out mx-auto flex items-center justify-center 
         shadow-md m-0 min-h-screen`}>
       <div className={`flex ${isMobileScreen ? 'flex-col' : 'flex-row'} mx-auto items-center justify-center`}>
         <div className="">
