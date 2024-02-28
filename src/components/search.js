@@ -84,11 +84,12 @@ const Search = () => {
         {/* Video Within Hero Banner */}
         <video className="absolute top-0 left-0 w-full h-full object-cover z-1" 
         autoPlay playsInline muted loop>
-          <source src="/assets/videos/test2.mp4" type="video/mp4" />
-          <source src="/assets/videos/test2.webm" type="video/webm" />
-          <source src="/assets/videos/test2.ogv" type="video/ogg" />
+          <source src={process.env.PUBLIC_URL + "/assets/videos/test2.mp4"} type="video/mp4" />
+          <source src={process.env.PUBLIC_URL + "/assets/videos/test2.webm"} type="video/webm" />
+          <source src={process.env.PUBLIC_URL + "/assets/videos/test2.ogv"} type="video/ogg" />
           Your browser does not support the video tag.
         </video>
+
         {/* Video Within Hero Banner */}
 
         {/* Overlay for Video */}
