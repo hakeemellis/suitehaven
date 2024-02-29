@@ -1,0 +1,13 @@
+Purpose of useState:
+
+useState is used to manage state within a React functional component. 
+It allows you to create and update state variables, which trigger re-renders of the component when their values change.
+
+Purpose of useEffect:
+
+useEffect is used to perform side effects in functional components, such as data fetching, subscriptions, or DOM manipulation. 
+It runs after every render of the component, including the initial render and subsequent updates.
+
+All in all;
+Essentially, useState is like a function (with the ability to set the state of variables) and 
+useEffect is what enables the state changes alongside other things

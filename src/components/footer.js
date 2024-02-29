@@ -5,8 +5,9 @@ import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
   return (
+    // Start for Footer //
     <footer className="bg-white dark:bg-zinc-950 py-4">
-      <div className="container mx-auto text-center">
+      <div className="container mx-auto text-center"> {/* Technically, this div is not needed but its okay */}
         <div className="flex justify-center space-x-4">
           <a href="https://www.linkedin.com/in/hakeem-ellis/" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600
           dark:text-white dark:hover:text-gray-400">
@@ -21,6 +22,7 @@ const Footer = () => {
         <b>All rights reserved &copy; 2024 Designed by Hakeem Ellis</b></Link></p>
       </div>
     </footer>
+  // End for Footer //
   );
 };
 

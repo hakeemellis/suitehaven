@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth'; // Importing necessary Firebase auth methods
-import { ReactComponent as SunIcon } from '../assets/images/sun.svg';
+import { Link, useNavigate } from 'react-router-dom'; // navigation methods within react (similar to html anchor element in a sense, especially Link)
+import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth'; // for authentication
+import { ReactComponent as SunIcon } from '../assets/images/sun.svg'; // to import and use images, has to be done this way
 import { ReactComponent as MoonIcon } from '../assets/images/moon.svg';
 import { ReactComponent as ProfileIcon } from '../assets/images/profile.svg';
-import { db, getDoc, doc } from './firebase'; // Importing the Firestore instance from firebase.js
+import { db, getDoc, doc } from './firebase'; // for database retrieval
 import './header.css'
 
 
+// { isDarkMode, toggleDarkMode } is present due to be defined in an external file and those variables can be triggered here
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
-  const [isProfileOpen, setProfileOpen] = useState(false);
+
+  // STATE MANAGEMENT // 
+  const [isProfileOpen, setProfileOpen] = useState(false); // State to check if profile menu is open
   const [user, setUser] = useState(null); // State to store user information
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth <= 767);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State to check if mobile menu is open
+  const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth <= 767); // State to check screen size
+  // STATE MANAGEMENT //
+
+  // DEFINING VARIABLES //
 
   const navigate = useNavigate();
 
+  // DEFINING VARIABLES //
+
+
+  // STATES & EFFECTS //
+
+  // Checking who is logged in to display first name in nav (in a non-clickable button)  //
   useEffect(() => {
     // Getting the authentication instance
     const auth = getAuth();
@@ -43,7 +55,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
             } else {
               console.log('User data is empty');
             }
-          } else {
+          } else { // defaults to say 'Guest' assuming user signed in as guest
             const guestUserData = { firstName: 'Guest' };
             setUser(guestUserData);
             console.log('User document does not exist');
@@ -60,9 +72,11 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     // Clean up subscription
     return () => unsubscribe();
   }, []); // Empty dependency array means this effect runs only once on component mount
-  
 
-  // Set up a listener for changes to the user's authentication state
+  // Checking who is logged in to display first name in nav (in a non-clickable button)  //
+
+
+  // checking if user is (was) signed in//
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe1 = onAuthStateChanged(auth, (currentUser) => {
@@ -79,11 +93,16 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     // Clean up subscription
     return () => unsubscribe1();
   }, []);
+  // checking if user is (was) signed in //
 
+
+  // To handle state change of profile button being clicked to open sub menu //
   const handleProfileToggle = () => {
     setProfileOpen(!isProfileOpen);
   };
 
+
+  // Sign user out //
   const handleLogout = () => {
     const auth = getAuth();
     if (auth.currentUser) {
@@ -100,7 +119,9 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
       alert("Can't log out. You're not logged in");
     }
   };
+  // Sign user out //
 
+  
   const handleSuiteListingClick = () => {
     if (!user) {
       alert("You're not logged in. Will not work.");
