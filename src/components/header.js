@@ -16,13 +16,13 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   const [user, setUser] = useState(null); // State to store user information
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State to check if mobile menu is open
   const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth <= 767); // State to check screen size
-  // STATE MANAGEMENT //
+  // END OF STATE MANAGEMENT //
 
   // DEFINING VARIABLES //
 
   const navigate = useNavigate();
 
-  // DEFINING VARIABLES //
+  // END OF DEFINING VARIABLES //
 
 
   // STATES & EFFECTS //
@@ -96,11 +96,25 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   // checking if user is (was) signed in //
 
 
-  // To handle state change of profile button being clicked to open sub menu //
-  const handleProfileToggle = () => {
-    setProfileOpen(!isProfileOpen);
+   // Function to check and update the screen size //
+   const checkScreenSize = () => { // the logic
+    setIsMobileScreen(window.innerWidth <= 767);
   };
 
+  useEffect(() => { // the action
+    // Add an event listener for window resize
+    window.addEventListener('resize', checkScreenSize); // Syntax window.addEventListener(eventName, eventHandlerFunction);
+    return () => {
+      // Clean up the event listener on component unmount
+      window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
+  // Function to check and update the screen size //
+
+  // END OF STATES & EFFECTS //
+
+
+  // TOGGLE OPTIONS //
 
   // Sign user out //
   const handleLogout = () => {
@@ -121,7 +135,8 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   };
   // Sign user out //
 
-  
+
+  // Just to populate message when clicking "Suite Listing" if not signed in
   const handleSuiteListingClick = () => {
     if (!user) {
       alert("You're not logged in. Will not work.");
@@ -132,6 +147,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     }
   };
 
+  // Just to populate message when clicking "Profile" if not signed in 
   const handleProfileClick = () => {
     if (!user) {
       alert("You're not logged in. Will not work.");
@@ -141,23 +157,17 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     }
   };
 
-   // Function to check and update the screen size
-   const checkScreenSize = () => {
-    setIsMobileScreen(window.innerWidth <= 767);
-  };
-
-  useEffect(() => {
-    // Add an event listener for window resize
-    window.addEventListener('resize', checkScreenSize);
-    return () => {
-      // Clean up the event listener on component unmount
-      window.removeEventListener('resize', checkScreenSize);
-    };
-  }, []);
-
+  // Item/function to toggle state for if mobile menu opens
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  // To handle state change of profile button being clicked to open sub menu //
+  const handleProfileToggle = () => {
+    setProfileOpen(!isProfileOpen);
+  };
+
+  // END OF TOGGLE OPTIONS //
 
   return (
     <header>
@@ -171,25 +181,27 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           <Link to="/" className="text-xl font-semibold">SuiteHaven</Link>
 
             {/* Hamburger Mobile Menu Button */}
-            <button className={`md:hidden absolute top-1/2 transform -translate-y-1/2 left-0 right-0 mx-auto flex items-center justify-center transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-90' : ''}`} onClick={toggleMobileMenu}>
-              {/* Replace with your SVG icon */}
+            <button className={`md:hidden absolute top-1/2 transform -translate-y-1/2 left-0 right-0 mx-auto 
+            flex items-center justify-center transition-transform duration-500 
+            ${isMobileMenuOpen ? 'rotate-90' : ''}`} onClick={toggleMobileMenu}>
+              {/* The SVG Hamburger Icon */}
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-7 w-7 text-black dark:text-white cursor-pointer">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/>
               </svg>
             </button>
 
 
-            {/* Render the mobile menu only for small screens */}
-            {isMobileScreen && isMobileMenuOpen && (
-             <div className="md:hidden absolute dark:bg-black bg-white p-4 rounded-md shadow-md dark:shadow-zinc-900 shadow-zinc-300 top-20 left-1/2 transform -translate-x-1/2">
-              {/* Mobile menu content */}
-              <div className="flex flex-col gap-2">
-                <Link to="/" className="text-md font-bold">Home</Link>
-                <Link to='/profile' className="text-md font-bold" onClick={handleProfileClick}>Profile</Link>
-                <Link to='/hotelsearch' className="text-md font-bold" onClick={handleSuiteListingClick}>Suite Listing</Link>
+              {/* Render the mobile menu only for small screens */}
+              {isMobileScreen && isMobileMenuOpen && (
+              <div className="md:hidden absolute dark:bg-black bg-white p-4 rounded-md shadow-md dark:shadow-zinc-900 shadow-zinc-300 top-20 left-1/2 transform -translate-x-1/2">
+                {/* Mobile menu content */}
+                <div className="flex flex-col gap-2">
+                  <Link to="/" className="text-md font-bold">Home</Link>
+                  <Link to='/profile' className="text-md font-bold" onClick={handleProfileClick}>Profile</Link>
+                  <Link to='/hotelsearch' className="text-md font-bold" onClick={handleSuiteListingClick}>Suite Listing</Link>
+                </div>
               </div>
-            </div>
-            )}
+              )}
 
             {/* Render the desktop menu only for large screens */}
             {!isMobileScreen && (
