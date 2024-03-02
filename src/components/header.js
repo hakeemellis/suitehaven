@@ -191,10 +191,10 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
             </button>
 
 
-              {/* Render the mobile menu only for small screens */}
+              {/* Render the mobile menu only for small screens (767px and lower due to md:hidden) */}
               {isMobileScreen && isMobileMenuOpen && (
               <div className="md:hidden absolute dark:bg-black bg-white p-4 rounded-md shadow-md dark:shadow-zinc-900 shadow-zinc-300 top-20 left-1/2 transform -translate-x-1/2">
-                {/* Mobile menu content */}
+                {/* Mobile menu content (flex-col to make it vertical) */}
                 <div className="flex flex-col gap-2">
                   <Link to="/" className="text-md font-bold">Home</Link>
                   <Link to='/profile' className="text-md font-bold" onClick={handleProfileClick}>Profile</Link>
@@ -203,10 +203,10 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
               </div>
               )}
 
-            {/* Render the desktop menu only for large screens */}
+            {/* Render the desktop menu only for large screens - if the isMobileScreen state is false, then it will render */}
             {!isMobileScreen && (
-            <div className="flex flex-grow justify-center">
-              <Link to="/" className="text-md font-bold mx-4">Home</Link>
+            <div className="flex flex-grow justify-center"> {/* (flex-grow to share the space evenly between the elements inside the div as by default flex grow is flex-grow: 1 in CSS) */}
+              <Link to="/" className="text-md font-bold mx-4">Home</Link> {/* mx (margin x/horziontal which is margin left and right) */}
               <Link to='/profile' className="text-md font-bold mx-4" onClick={handleProfileClick}>Profile</Link>
               <Link to='/hotelsearch' className="text-md font-bold mx-4" onClick={handleSuiteListingClick}>Suite Listing</Link>
             </div>
