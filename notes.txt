@@ -11,3 +11,62 @@ It runs after every render of the component, including the initial render and su
 All in all;
 Essentially, useState is like a function (with the ability to set the state of variables) and 
 useEffect is what enables the state changes alongside other things
+
+
+Positions:
+
+static: This is the default position value. 
+Elements are positioned according to the normal flow of the document. 
+Using other position values like absolute, fixed, relative, or sticky will override the static positioning.
+
+relative: Elements are positioned relative to their normal position in the document flow. 
+When you set an element to position: relative, you can use the top, right, bottom, and left properties to offset it 
+from its normal position.
+
+absolute: Elements are positioned relative to their nearest positioned ancestor. 
+If no positioned ancestor is found, they are positioned relative to the initial 
+containing block (usually the <html> element). An absolutely positioned element is taken out of the normal document flow, 
+so it doesn't affect the position of other elements.
+
+fixed: Elements are positioned relative to the viewport (the browser window). 
+They remain fixed in their position even when the page is scrolled. 
+Like absolutely positioned elements, fixed-positioned elements are taken out of the normal document flow.
+
+sticky: Elements are positioned based on the user's scroll position. 
+They behave like relative positioned elements until they reach a specified scroll position (determined by the top, right, bottom, or left properties), 
+at which point they become fixed positioned.
+
+
+Logical Operators:
+
+Logical AND (&&): Returns true if both operands are truthy; otherwise, returns false.
+
+Example: if (x === 5 && y === 10) { /* Code */ }
+
+Logical OR (||): Returns true if at least one of the operands is truthy; otherwise, returns false.
+
+Example: if (x === 5 || y === 10) { /* Code */ }
+
+Logical NOT (!): Returns the opposite boolean value of the operand. If the operand is truthy, ! returns false; if the operand is falsy, ! returns true.
+
+Example: if (!loggedIn) { /* Code */ }
+
+
+Conditional Rendering of Profile:
+
+{user ? (
+  // Code to execute if user exists (is truthy)
+) : (
+  // Code to execute if user does not exist (is falsy)
+)}
+
+user is a variable that presumably holds information about the current user.
+
+The ? is the ternary operator, which is a short way to write an if-else statement. 
+It checks if user exists and evaluates to true (meaning the user is logged in).
+
+If user exists (is truthy), the code inside the first set of parentheses { ... } is executed. 
+This includes displaying a greeting message (Hi, {user.firstName}) and a logout button.
+
+If user does not exist (is falsy), the code inside the second set of parentheses { ... } is 
+executed. This typically includes options for signing up or logging in.
