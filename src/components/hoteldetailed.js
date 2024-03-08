@@ -1,60 +1,84 @@
 import React, { useEffect, useState } from 'react';
-import { HotelSummaryAPI, HotelDetailsAPI } from './hotelapi';
-import Modal from './modal';
-import parse from 'html-react-parser'
+import { HotelSummaryAPI, HotelDetailsAPI } from './hotelapi'; // importing the APIs to use
+import Modal from './modal'; // importation of a compontent (for the photos)
+import parse from 'html-react-parser' // to allow for react to automatically render html from JSON
 
 const HotelDetailed = () => {
-  const [hotelName, setHotelName] = useState(null);
-  const [hotelImages, setHotelImages] = useState([]);
-  const [hotelScore, setHotelScore] = useState(null);
-  const [aboutProperty, setAboutProperty] = useState('');
-  const [aboutLanguages, setAboutLanguages] = useState('');
-  const [aboutPolicies, setAboutPolicies] = useState('');
-  const [aboutExtras, setAboutExtras] = useState('');
-  const [extrasContent, setExtrasContent] = useState('');
-  const [aboutHeaderText, setAboutHeaderText] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [amenities, setAmenities] = useState([]);
-  const [initialImageCount, setInitialImageCount] = useState(''); // Initial image count for desktop
-  const [alertTriggered, setAlertTriggered] = useState(false)
 
+  // STATE MANAGEMENT // 
+  const [hotelName, setHotelName] = useState(null); // to display hotel name from JSON
+  const [hotelImages, setHotelImages] = useState([]); // to display hotel images from JSON
+  const [hotelScore, setHotelScore] = useState(null); // to display hotel ratings from JSON
+  const [aboutProperty, setAboutProperty] = useState(''); // to display information about the property from JSON
+  const [aboutLanguages, setAboutLanguages] = useState('');// to display information regarding languages from JSON
+  const [aboutPolicies, setAboutPolicies] = useState(''); // to display information about policies from JSON
+  const [aboutExtras, setAboutExtras] = useState(''); // to display information about optional extras title from JSON
+  const [extrasContent, setExtrasContent] = useState(''); // to display information about optional extras from JSON
+  const [aboutHeaderText, setAboutHeaderText] = useState('');
+  const [loading, setLoading] = useState(true); // loading screen
+  const [error, setError] = useState(null); // for debugging, to show only if error occurs.
+  const [showModal, setShowModal] = useState(false); // to set modal (photo modal) to show to the user
+  const [amenities, setAmenities] = useState([]); // to display information about amenities offered
+  const [initialImageCount, setInitialImageCount] = useState(''); // to assist with conditionally rendering images from JSON
+  const [alertTriggered, setAlertTriggered] = useState(false) // to set alert
+  // END OF STATE MANAGEMENT //
+
+
+  // STATES & EFFECTS //
+
+  // Ultimately to read, check and change the respective state of various variables
+  // To allow us to call later in our file regarding the hotel and the respective JSON data
   useEffect(() => {
     const fetchHotelDetails = async () => {
       try {
-        const hotelId = sessionStorage.getItem('hotel_id');
+        const hotelId = sessionStorage.getItem('hotel_id'); // to get the respective value from sessionstorage
         if (!hotelId) {
-          throw new Error('Hotel ID not found in sessionStorage.');
+          throw new Error('Hotel ID not found in sessionStorage.'); // will only throw this error if no value is found for hotelID
         }
 
-        const data = await HotelSummaryAPI(hotelId);
-        if (!data || !data.summary || !data.summary.name) {
+        // To access hotel name from JSON. We use "hotelId" due to the code above having the params.
+        const data = await HotelSummaryAPI(hotelId); // Writing "await HotelSummaryAPI(hotelId)" sets us at the root of the JSON data
+        if (!data || !data.summary || !data.summary.name) { // navigating the route of the JSON but unique way.
           throw new Error('Hotel details not found.');
         }
-        setHotelName(data.summary.name);
+        // Due to "NOT!" operator making the statement change from false to true due to condition being met
+        // Operator "NOT!" has the tendency to change false to true and true to false depending on criteria
+        // Ultimately, due to all params in the if statement being true (due to actually fetching data), no error was thrown
 
+        setHotelName(data.summary.name); // Assign respective state so we can dynamically use it to call the JSON path
+
+
+        // To access hotel rating from JSON
         const detailsData = await HotelDetailsAPI(hotelId);
         if (!detailsData || !detailsData.reviewInfo || !detailsData.reviewInfo.summary || !detailsData.reviewInfo.summary.overallScoreWithDescriptionA11y) {
           throw new Error('Hotel score not found.');
         }
         setHotelScore(detailsData.reviewInfo.summary.overallScoreWithDescriptionA11y.value);
 
-        if (detailsData && detailsData.propertyGallery && detailsData.propertyGallery.images) {
+
+        // Because we're using the same API, for readability we continue below
+
+        // To access hotel images from JSON
+        if (detailsData && detailsData.propertyGallery && detailsData.propertyGallery.images) { // also navigates route of the JSON but in a unique way
+          // will only navigate if each route after the other is true or else it will fail at whichever params is not true (has null or no data to load)
           setHotelImages(detailsData.propertyGallery.images);
         } else {
-          setHotelImages([]);
+          setHotelImages([]); // to prevent the code from crashing abruptly, we added this to set the answer to "null" or nothing
         }
 
+        // To access hotel amenities from JSON
         if (detailsData && detailsData.summary && detailsData.summary.amenities && detailsData.summary.amenities.topAmenities && detailsData.summary.amenities.topAmenities.items) {
           setAmenities(detailsData.summary.amenities.topAmenities.items);
         } else {
           setAmenities([]);
         }
-      
+
+        // To access information about the hotel from JSON
         const aboutPropertyText = detailsData.propertyContentSectionGroups?.aboutThisProperty?.sections[0]?.bodySubSections[0]?.elements[0]?.items[0]?.content?.text || '';
+        // Method above is a more direct way to access the JSON data. There are no underlying conditions. If it gives "null" the OR operator will chip in
         setAboutProperty(aboutPropertyText);
 
+        // To access information about the languages of the hotel from JSON
         const aboutLanguagesText = detailsData.propertyContentSectionGroups?.aboutThisProperty?.sections[0]?.bodySubSections[1]?.elements[0]?.items[0]?.content?.primary?.value || '';
         setAboutLanguages(aboutLanguagesText);
 

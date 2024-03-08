@@ -212,8 +212,8 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
             </div>
             )}
 
-          <div className="relative">
-            <button className="px-4 py-2" onClick={handleProfileToggle}>
+          <div className="relative"> {/* Because its not wrapped in previous position (like a div with an already set position), the element is positioned to the html i.e. we have to set it */}
+            <button className="px-4 py-2" onClick={handleProfileToggle}> {/* PX is padding left and right | PY is padding up and down */}
               <ProfileIcon className="w-8 h-8" />
             </button>
             {isProfileOpen && (
@@ -221,7 +221,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
               duration-500 ease-in-out py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none shadow-md shadow-stone-400 dark:shadow-stone-900" 
               role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
                 {user ? (
-                  <>
+                  <> {/* <> and </> are known as fragments || can be used like divs in React */}
                     <p className="block px-4 py-2 text-sm text-gray-700 dark:text-white rounded">
                       Hi, {user.firstName}
                     </p>

@@ -1,9 +1,12 @@
 // lib/HotelAPI.js
 
+// Utilizing sessionstorage to pull the information required
+
+// To populate potential region choices depending on search query
 const HotelAPI = async (userQuery) => {
   const url = `https://hotels-com-provider.p.rapidapi.com/v2/regions?query=${encodeURIComponent(userQuery)}&domain=US&locale=en_US`;
   const headers = {
-    'X-RapidAPI-Key': 'f4f8e6ee27mshbcb0ec03a01bd62p102036jsnf97b220c20a4', // Replace with your RapidAPI key
+    'X-RapidAPI-Key': 'f4f8e6ee27mshbcb0ec03a01bd62p102036jsnf97b220c20a4', 
     'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
   };
 
@@ -16,10 +19,12 @@ const HotelAPI = async (userQuery) => {
   }
 };
 
+
+// To populate hotel choice depending on region selected
 const HotelResultsAPI = async (regionId, checkInDate, checkOutDate) => {
   const url = `https://hotels-com-provider.p.rapidapi.com/v2/hotels/search?region_id=${regionId}&locale=en_US&checkin_date=${checkInDate}&sort_order=RECOMMENDED&adults_number=1&domain=US&checkout_date=${checkOutDate}`;
   const headers = {
-    'X-RapidAPI-Key': 'f4f8e6ee27mshbcb0ec03a01bd62p102036jsnf97b220c20a4', // Replace with your RapidAPI key
+    'X-RapidAPI-Key': 'f4f8e6ee27mshbcb0ec03a01bd62p102036jsnf97b220c20a4', 
     'X-RapidAPI-Host': 'hotels-com-provider.p.rapidapi.com'
   };
 
@@ -33,6 +38,7 @@ const HotelResultsAPI = async (regionId, checkInDate, checkOutDate) => {
 };
 
 
+// To populate hotel summary depending on choice selected
 const HotelSummaryAPI = async (hotelId) => {
   const url = `https://hotels-com-provider.p.rapidapi.com/v2/hotels/summary?hotel_id=${hotelId}&domain=US&locale=en_US&domain=US`;
   const options = {
@@ -57,6 +63,7 @@ const HotelSummaryAPI = async (hotelId) => {
 };
 
 
+// To populate specific information about the respective hotel selected
 const HotelInfoAPI = async (hotelId) => {
   const url = `https://hotels-com-provider.p.rapidapi.com/v2/hotels/info?hotel_id=${hotelId}&domain=US&locale=en_US`;
   const options = {
@@ -76,6 +83,8 @@ const HotelInfoAPI = async (hotelId) => {
   }
 };
 
+
+// To populate specific information about the respective hotel selected
 const HotelDetailsAPI = async (hotelId) => {
   const url = `https://hotels-com-provider.p.rapidapi.com/v2/hotels/details?domain=US&hotel_id=${hotelId}&locale=en_US`;
   const options = {
