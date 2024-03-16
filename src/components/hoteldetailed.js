@@ -82,19 +82,10 @@ const HotelDetailed = () => {
         const aboutLanguagesText = detailsData.propertyContentSectionGroups?.aboutThisProperty?.sections[0]?.bodySubSections[1]?.elements[0]?.items[0]?.content?.primary?.value || '';
         setAboutLanguages(aboutLanguagesText);
 
-        // Load the value from the path elements[0] > header > text separately
+        // To access information about the header text (which generally outlines policies) from JSON
         const headerText = detailsData.propertyContentSectionGroups?.policies?.sections[0]?.bodySubSections[1]?.elements[0]?.header?.text || '';
         setAboutHeaderText(headerText)
         console.log(headerText);
-
-        // Load the value from the path elements[0] > header > text separately
-        const optionalTitle = detailsData.propertyContentSectionGroups?.policies?.sections[0]?.bodySubSections[0]?.elements[0]?.header?.text || '';
-        setAboutExtras(optionalTitle)
-        console.log(optionalTitle);
-
-        const optionalSection = detailsData.propertyContentSectionGroups?.policies?.sections[0]?.bodySubSections[0]?.elements[0]?.items || '';
-        const optionalText = optionalSection.map(item => item?.content?.text || '');
-        setExtrasContent(optionalText)
 
         //const policyItems = policiesSection?.bodySubSections[0]?.elements[0]?.items || [];
         //const policyTexts = policyItems.map(item => item?.content?.text || '');
@@ -114,34 +105,45 @@ const HotelDetailed = () => {
         //});
         setAboutPolicies(policyTexts);
         console.log(policyTexts)
-      } catch (error) {
-        setError('Error fetching hotel details: ' + error.message);
+
+        // To access information about the next sub header and sub text (which generally outlines something else) from JSON
+        const optionalTitle = detailsData.propertyContentSectionGroups?.policies?.sections[0]?.bodySubSections[0]?.elements[0]?.header?.text || '';
+        setAboutExtras(optionalTitle)
+        console.log(optionalTitle);
+
+        const optionalSection = detailsData.propertyContentSectionGroups?.policies?.sections[0]?.bodySubSections[0]?.elements[0]?.items || '';
+        const optionalText = optionalSection.map(item => item?.content?.text || '');
+        setExtrasContent(optionalText)
+      } catch (error) { // (error is pumped out by the react model, so we catch the error)
+        setError('Error fetching hotel details: ' + error.message); // (generate the message that the error says)
       } finally {
         setLoading(false);
       }
     };
 
-    fetchHotelDetails();
-  }, []);
+    fetchHotelDetails(); // To do the function
+  }, []); // [] is set to make the function run multiple times when requested instead of a certain amount of times
+  // If I had [1] it would only execute once
 
-  const handleShowMore = () => {
+  const handleShowMore = () => { // to trigger custom alert for images button and show modal state for images
     if (!alertTriggered) {
       alert(`You'll have to close this modal and reclick the button to see all images`);
       setAlertTriggered(true);
       setShowModal (true)
     }
     else{
-    setShowModal(true);
+    setShowModal(true); // to just go ahead and show the modal without the alert
     }
   };
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    setShowModal(false); // to let the modal disappear due to false
   };
 
+  // For Mobile and Desktop Behavior for Initial Hotel Images
   useEffect(() => {
     const checkScreenWidth = () => {
-      const isMobile = window.innerWidth <= 1024; // Adjust the threshold as needed
+      const isMobile = window.innerWidth <= 1024; // to set the window size for the variable
       if (isMobile) {
         setInitialImageCount(1);
       } else {
@@ -156,9 +158,14 @@ const HotelDetailed = () => {
     return () => {
       window.removeEventListener('resize', checkScreenWidth);
     };
+    /*  
+    The event listener code continually executes the checkScreenWidth function over and over again 
+    because it detects the window resizing. If the even listener wasn't there, the code 
+    would have only checked once
+    */
   }, []);
 
-  if (loading) {
+  if (loading) { //With setting this,
     return (
       <div className="dark:bg-black dark:text-white absolute top-0 left-0 w-full h-full flex justify-center items-center">
         <div className="text-center text-4xl font-semibold">Loading...</div>
